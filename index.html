@@ -122,6 +122,16 @@
   .gallery-grid .g-item:hover img{transform:scale(1.04);}
   .gallery-grid .g-item.tall{grid-row:span 2;}
   @media(max-width:900px){.gallery-grid{grid-template-columns:repeat(2,1fr);}.gallery-grid .g-item.tall{grid-row:span 1;}}
+
+  /* ─── Promo Video ─── */
+  .promo{background:var(--bg);}
+  .promo-video-wrap{
+    max-width:380px;margin:0 auto;
+    border:1px solid var(--line);border-radius:8px;overflow:hidden;
+    background:#000;
+  }
+  .promo-video-wrap video{width:100%;height:auto;aspect-ratio:9/16;display:block;background:#000;}
+  @media(max-width:480px){.promo-video-wrap{max-width:280px;}}
   @media(max-width:560px){.gallery-grid{grid-template-columns:1fr;}.gallery-grid .g-item.tall{grid-row:span 1;}}
 
   /* ─── Feature blocks ─── */
@@ -293,6 +303,19 @@
       <div class="item"><div class="k">Propeller</div><div class="v">13インチ大型プロペラ</div></div>
       <div class="item"><div class="k">Battery</div><div class="v">18V 6Ah / 約1.5ha散布</div></div>
       <div class="item"><div class="k">Pump</div><div class="v">500ml〜5.6L/分 可変</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Promo Video ─── -->
+<section class="promo" id="promo">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">PROMOTION VIDEO</div>
+      <h2>実際の走行を、<br>動画で見る。</h2>
+    </div>
+    <div class="promo-video-wrap reveal">
+      <video controls playsinline preload="metadata" src="プロモーションビデオ.mp4"></video>
     </div>
   </div>
 </section>
