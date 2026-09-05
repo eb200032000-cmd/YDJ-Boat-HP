@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YOSHIDA KAKO ｜ 農薬散布ボート JFF-01</title>
+
+<!-- ─── Home screen / favicon icons ─── -->
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<meta name="theme-color" content="#0B0C0E">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="YOSHIDA KAKO">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700;900&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="common.css">
+<style>
+  /* ─── Hero ─── */
+  .hero{
+    position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;
+  }
+  .hero-bg{
+    position:absolute;inset:0;
+    background-image:url('img05.jpg');
+    background-size:cover;background-position:50% 45%;
+  }
+  .hero-scrim{
+    position:absolute;inset:0;
+    background:
+      linear-gradient(180deg,rgba(11,12,14,.5) 0%,rgba(11,12,14,.25) 30%,rgba(11,12,14,.6) 60%,rgba(11,12,14,.98) 100%),
+      linear-gradient(90deg,rgba(11,12,14,.75) 0%,rgba(11,12,14,.1) 60%);
+  }
+  .hero-content{position:relative;z-index:2;width:100%;padding:160px 0 0;}
+  .hero h1{font-size:clamp(36px,7vw,74px);line-height:1.08;max-width:14ch;margin-top:16px;}
+  .hero p.lead{margin-top:22px;max-width:44ch;color:var(--ink-dim);font-size:17px;}
+  .cta-row{margin-top:34px;display:flex;gap:14px;flex-wrap:wrap;}
+
+  /* ticker */
+  .ticker{position:relative;z-index:2;margin-top:64px;border-top:1px solid var(--line);background:rgba(21,23,26,.65);}
+  .ticker .wrap{display:grid;grid-template-columns:repeat(4,1fr);}
+  .ticker .item{padding:18px 18px 22px 0;border-right:1px solid var(--line);}
+  .ticker .item:last-child{border-right:none;}
+  .ticker .k{font-family:var(--mono);font-size:11px;color:var(--ink-dim);text-transform:uppercase;letter-spacing:.08em;}
+  .ticker .v{font-family:var(--mono);font-size:15px;color:var(--ink);margin-top:6px;line-height:1.4;}
+  @media(max-width:720px){.ticker .wrap{grid-template-columns:repeat(2,1fr);}.hero-content{padding-top:120px;}}
+  @media(max-width:480px){
+    .ticker .wrap{grid-template-columns:1fr;}
+    .ticker .item{border-right:none;border-bottom:1px solid var(--line);padding:16px 0;}
+    .ticker .item:last-child{border-bottom:none;}
+  }
+
+  /* ─── Gallery ─── */
+  .gallery{background:var(--panel);overflow:hidden;}
+  .gallery-top{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;}
+  .gallery-top .section-head{margin-bottom:0;}
+  .gallery-nav{display:flex;gap:8px;flex-shrink:0;padding-bottom:4px;}
+  .gallery-nav button{
+    width:44px;height:44px;border-radius:50%;
+    background:var(--panel-2);border:1px solid var(--line);color:var(--ink);
+    display:flex;align-items:center;justify-content:center;cursor:pointer;
+    transition:border-color .2s,transform .15s,opacity .2s;
+  }
+  .gallery-nav button:hover{border-color:var(--ink-dim);}
+  .gallery-nav button:active{transform:scale(.94);}
+  .gallery-nav button:disabled{opacity:.3;cursor:default;}
+  .gallery-nav button svg{width:18px;height:18px;}
+
+  .gallery-carousel{
+    display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;
+    margin:32px -24px 0;padding:4px 24px 10px;
+    -webkit-overflow-scrolling:touch;scrollbar-width:none;
+  }
+  .gallery-carousel::-webkit-scrollbar{display:none;}
+  .g-slide{
+    flex:0 0 auto;width:min(78vw,340px);scroll-snap-align:start;
+    background:var(--panel-2);border:1px solid var(--line);border-radius:10px;overflow:hidden;
+  }
+  .g-media{position:relative;aspect-ratio:4/3;overflow:hidden;background:#000;}
+  .g-media.has-photo{cursor:zoom-in;}
+  .g-media.has-photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease;}
+  .g-media.has-photo:hover img{transform:scale(1.05);}
+  .g-media.placeholder{
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;
+    color:var(--ink-dim);border-bottom:1px dashed var(--line);
+    background:repeating-linear-gradient(135deg,rgba(236,237,239,.04) 0 10px,transparent 10px 20px);
+  }
+  .g-media.placeholder svg{width:28px;height:28px;opacity:.55;}
+  .g-media.placeholder span{font-family:var(--cond);font-size:11px;letter-spacing:.08em;text-transform:uppercase;}
+  .g-caption{padding:16px 18px 20px;}
+  .g-tag{font-family:var(--cond);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);}
+  .g-tag.is-pending{color:var(--ink-dim);}
+  .g-caption p{margin:8px 0 0;font-size:13.5px;color:var(--ink-dim);line-height:1.6;}
+  @media(max-width:560px){.g-slide{width:82vw;}}
+
+  /* ─── Gallery lightbox ─── */
+  .lightbox{
+    position:fixed;inset:0;z-index:200;background:rgba(11,12,14,.94);
+    display:flex;align-items:center;justify-content:center;padding:40px 20px;
+    opacity:0;visibility:hidden;transition:opacity .2s ease,visibility .2s;
+  }
+  .lightbox.is-open{opacity:1;visibility:visible;}
+  .lightbox img{max-width:min(900px,92vw);max-height:78vh;object-fit:contain;border-radius:4px;}
+  .lightbox-close{
+    position:absolute;top:20px;right:20px;width:44px;height:44px;border-radius:50%;
+    background:var(--panel-2);border:1px solid var(--line);color:var(--ink);
+    display:flex;align-items:center;justify-content:center;cursor:pointer;
+  }
+  .lightbox-close svg{width:18px;height:18px;}
+  .lightbox-caption{position:absolute;left:0;right:0;bottom:20px;text-align:center;color:var(--ink-dim);font-size:13px;padding:0 20px;}
+
+  /* ─── Promo Video ─── */
+  .promo{background:var(--bg);}
+  .promo-video-wrap{
+    max-width:380px;margin:0 auto;
+    border:1px solid var(--line);border-radius:8px;overflow:hidden;
+    background:#000;
+  }
+  .promo-video-wrap video{width:100%;height:auto;aspect-ratio:9/16;object-fit:cover;display:block;background:#000;}
+  @media(max-width:480px){.promo-video-wrap{max-width:280px;}}
+
+  /* ─── Feature blocks ─── */
+  .features{background:var(--bg);}
+  .feat-blocks{display:flex;flex-direction:column;gap:1px;background:var(--line);}
+  .feat-block{
+    background:var(--panel);
+    display:grid;grid-template-columns:.9fr 1.1fr;
+    align-items:start;
+    gap:0;
+  }
+  .feat-block.rev{direction:rtl;}
+  .feat-block.rev > *{direction:ltr;}
+  .feat-block .fb-img{overflow:hidden;aspect-ratio:4/3;}
+  .feat-block .fb-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease;}
+  .feat-block:hover .fb-img img{transform:scale(1.04);}
+  .feat-block .fb-body{padding:56px 48px;}
+  .feat-block .fb-tag{
+    font-family:var(--cond);font-size:11px;text-transform:uppercase;letter-spacing:.15em;
+    color:var(--accent);margin-bottom:16px;display:block;
+  }
+  .feat-block h3{font-size:clamp(20px,2.5vw,26px);}
+  .feat-block .feat-list{list-style:none;margin:20px 0 0;padding:0;display:flex;flex-direction:column;gap:14px;}
+  .feat-block .feat-list li{
+    display:flex;gap:14px;align-items:flex-start;
+    font-size:14.5px;color:var(--ink-dim);line-height:1.7;
+    border-top:1px solid var(--line);padding-top:14px;
+  }
+  .feat-block .feat-list li:first-child{border-top:none;padding-top:0;}
+  .feat-block .feat-list li::before{
+    content:'●';font-size:7px;color:var(--accent);margin-top:6px;flex-shrink:0;
+  }
+  @media(max-width:900px){
+    .feat-block,.feat-block.rev{grid-template-columns:1fr;direction:ltr;}
+    .feat-block .fb-body{padding:36px 24px;}
+  }
+
+  /* ─── Pump / Gyro (spec) ─── */
+  .specs{background:var(--panel);}
+  .spec-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px;background:var(--line);}
+  @media(max-width:720px){.spec-grid{grid-template-columns:1fr;}}
+  .spec-card{background:var(--bg);padding:40px;}
+  .spec-card .sc-tag{font-family:var(--cond);font-size:11px;text-transform:uppercase;letter-spacing:.14em;color:var(--blue);margin-bottom:16px;display:block;}
+  .spec-card h3{font-size:21px;}
+  .spec-card p{color:var(--ink-dim);font-size:14.5px;margin-top:14px;line-height:1.75;}
+
+  /* ─── Process ─── */
+  .process{background:var(--bg);}
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--line);}
+  @media(max-width:900px){.steps{grid-template-columns:1fr;}}
+  .step{padding:32px 28px 32px 0;border-right:1px solid var(--line);}
+  .step:last-child{border-right:none;}
+  @media(max-width:900px){
+    .step{border-right:none;border-bottom:1px solid var(--line);padding:28px 0;}
+    .step:last-child{border-bottom:none;}
+  }
+  .step .snum{font-family:var(--cond);font-size:42px;color:var(--accent);}
+  .step h3{font-size:19px;margin-top:14px;}
+  .step p{color:var(--ink-dim);margin-top:10px;font-size:15px;}
+
+  /* ─── Experience cards (操船シミュレーター / カラーシミュレーター へ誘導) ─── */
+  .experience{background:var(--panel);}
+  .exp-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px;background:var(--line);}
+  @media(max-width:820px){.exp-grid{grid-template-columns:1fr;}}
+  .exp-card{
+    background:var(--bg);padding:44px 40px;text-decoration:none;color:var(--ink);
+    display:flex;flex-direction:column;
+    transition:background .2s;
+  }
+  .exp-card:hover{background:var(--panel-2);}
+  .exp-card .exp-tag{font-family:var(--cond);font-size:11px;text-transform:uppercase;letter-spacing:.14em;color:var(--blue);margin-bottom:16px;}
+  .exp-card h3{font-size:clamp(19px,2.4vw,23px);line-height:1.4;}
+  .exp-card p{color:var(--ink-dim);font-size:14.5px;margin-top:12px;line-height:1.75;flex-grow:1;}
+  .exp-card .exp-cta{
+    margin-top:24px;font-family:var(--cond);font-size:13px;letter-spacing:.05em;text-transform:uppercase;
+    color:var(--accent);display:inline-flex;align-items:center;gap:8px;
+  }
+  .exp-card .exp-cta svg{width:14px;height:14px;transition:transform .2s;}
+  .exp-card:hover .exp-cta svg{transform:translateX(4px);}
+
+  /* ─── FAQ ─── */
+  .faq{background:var(--bg);}
+  .faq-list{border-top:1px solid var(--line);}
+  .faq-item{border-bottom:1px solid var(--line);}
+  .faq-item summary{
+    list-style:none;cursor:pointer;padding:24px 0;
+    display:flex;align-items:flex-start;gap:16px;
+    font-size:16px;font-weight:700;
+  }
+  .faq-item summary::-webkit-details-marker{display:none;}
+  .faq-item summary .q-mark{font-family:var(--cond);color:var(--accent);flex-shrink:0;}
+  .faq-item summary .icon{margin-left:auto;flex-shrink:0;color:var(--ink-dim);transition:transform .2s;}
+  .faq-item[open] summary .icon{transform:rotate(45deg);}
+  .faq-item .a-body{display:flex;gap:16px;padding:0 0 26px;}
+  .faq-item .a-body .a-mark{font-family:var(--cond);color:var(--ink-dim);flex-shrink:0;}
+  .faq-item .a-body p{margin:0;color:var(--ink-dim);font-size:14.5px;line-height:1.8;}
+
+  /* ─── Story ─── */
+  .story{background:var(--panel);}
+  .story-grid{display:grid;grid-template-columns:.65fr 1.35fr;gap:64px;}
+  @media(max-width:900px){.story-grid{grid-template-columns:1fr;gap:36px;}}
+  .story blockquote{
+    margin:0;font-size:clamp(20px,2.8vw,28px);font-weight:700;line-height:1.55;
+    border-left:3px solid var(--accent);padding-left:22px;
+  }
+  .story .body{color:var(--ink-dim);font-size:16px;}
+  .story .body p{margin:0 0 18px;}
+  .signature{font-family:var(--cond);color:var(--ink-dim);font-size:13px;letter-spacing:.05em;margin-top:24px;}
+
+  /* ─── Contact ─── */
+  .contact{background:var(--panel);}
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;}
+  @media(max-width:900px){.contact-grid{grid-template-columns:1fr;}}
+  .field{margin-bottom:18px;}
+  .field label{display:block;font-family:var(--mono);font-size:11px;color:var(--ink-dim);text-transform:uppercase;letter-spacing:.07em;margin-bottom:8px;}
+  .field input,.field textarea{
+    width:100%;background:var(--bg);border:1px solid var(--line);color:var(--ink);
+    padding:13px 14px;font-family:var(--display);font-size:14.5px;border-radius:2px;
+  }
+  .field textarea{min-height:120px;resize:vertical;}
+  .field input:focus,.field textarea:focus{outline:none;border-color:var(--blue);}
+  .contact-info .row{display:flex;gap:16px;padding:18px 0;border-top:1px solid var(--line);}
+  .contact-info .row:first-child{border-top:none;}
+  .contact-info .k{font-family:var(--mono);font-size:11px;color:var(--ink-dim);min-width:80px;text-transform:uppercase;letter-spacing:.06em;padding-top:3px;}
+</style>
+</head>
+<body id="top">
+
+<!-- ============================================================
+     会社情報は company-info.js に集約しています。
+     (所在地・電話番号などは company-info.js を1回書き換えるだけで
+      会社概要ページとお問い合わせの両方に反映されます)
+============================================================ -->
+<script src="company-info.js"></script>
+
+<!-- ─── Header ─── -->
+<header>
+  <div class="wrap">
+    <a class="logo" href="index.html">YOSHIDA KAKO<span>KK</span></a>
+    <button class="nav-toggle" id="navToggle" type="button" aria-label="メニューを開く" aria-expanded="false" aria-controls="siteNav">
+      <span></span><span></span><span></span>
+    </button>
+    <nav id="siteNav">
+      <ul>
+        <li><a href="index.html#product" data-nav="product">製品概要</a></li>
+        <li><a href="index.html#promo" data-nav="promo">動画</a></li>
+        <li><a href="index.html#gallery" data-nav="gallery">ギャラリー</a></li>
+        <li><a href="index.html#features" data-nav="features">特徴</a></li>
+        <li><a href="index.html#howto" data-nav="howto">使い方</a></li>
+        <li><a href="index.html#specs" data-nav="specs">スペック</a></li>
+        <li><a href="index.html#faq" data-nav="faq">よくある質問</a></li>
+        <li class="nav-sep" aria-hidden="true"></li>
+        <li><a href="simulator.html" data-nav="simulator">操船シミュレーター</a></li>
+        <li><a href="color.html" data-nav="color">カラーシミュレーター</a></li>
+        <li><a href="index.html#contact" data-nav="contact">お問い合わせ</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- ─── Hero ─── -->
+<section class="hero" id="product">
+  <div class="hero-bg"></div>
+  <div class="hero-scrim"></div>
+  <div class="hero-content">
+    <div class="wrap">
+      <div class="eyebrow">農薬散布ボート / AGRICULTURAL SPRAY BOAT</div>
+      <h1>田んぼの上を、<br>走らせる。</h1>
+      <p class="lead">YOSHIDA KAKOが開発する電動農薬散布ボート。ウレタン製の軽量船体と大型プロペラが生み出す推進力で、水田を自在に走りながら薬剤を届けます。</p>
+      <div class="cta-row">
+        <a href="#contact" class="btn btn-primary">お見積り・資料について問い合わせる</a>
+        <a href="#features" class="btn btn-ghost">特徴を見る</a>
+      </div>
+    </div>
+  </div>
+  <!-- モバイル固定CTAバー: このマーカーが画面外(上)に出たらバーを表示する -->
+  <div id="ctaBarShow" aria-hidden="true"></div>
+  <div class="ticker">
+    <div class="wrap">
+      <div class="item"><div class="k">Hull</div><div class="v">軽量ウレタンフォーム</div></div>
+      <div class="item"><div class="k">Propeller</div><div class="v">13インチ大型プロペラ</div></div>
+      <div class="item"><div class="k">Battery</div><div class="v">18V 6Ah / 約1.5ha散布</div></div>
+      <div class="item"><div class="k">Pump</div><div class="v">500ml〜5.6L/分 可変</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Promo Video ─── -->
+<section class="promo" id="promo">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">PROMOTION VIDEO</div>
+      <h2>実際の走行を、<br>動画で見る。</h2>
+    </div>
+    <div class="promo-video-wrap reveal">
+      <video controls playsinline preload="metadata" width="720" height="1280" poster="img06.jpg" src="プロモーションビデオ.mp4"></video>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Gallery ─── -->
+<section class="gallery" id="gallery">
+  <div class="wrap">
+    <div class="gallery-top reveal">
+      <div class="section-head">
+        <div class="eyebrow">GALLERY</div>
+        <h2>証拠写真で見る、JFF-01。</h2>
+        <p>全景から船体・推進部・散布シーンまで、1枚ごとに見どころを絞った構成です。撮影待ちのカットは準備が整い次第、順次差し替えます。</p>
+      </div>
+      <div class="gallery-nav">
+        <button type="button" id="galPrev" aria-label="前の写真へ">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <button type="button" id="galNext" aria-label="次の写真へ">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="gallery-carousel reveal" id="galleryCarousel">
+
+      <!-- 1. 全景(製品の顔) -->
+      <div class="g-slide">
+        <div class="g-media has-photo" data-lightbox-src="img05.jpg" data-lightbox-caption="全景(製品の顔) — 田んぼのそばに置いた実機">
+          <img src="img05.jpg" alt="JFF-01 全景。田んぼのそばに置いた実機" loading="lazy">
+        </div>
+        <div class="g-caption">
+          <span class="g-tag">全景(製品の顔)</span>
+          <p>田んぼのそばに置いた実機の全体像。カーボン柄フレームと軽量ウレタン船体のシルエットがひと目で伝わります。</p>
+        </div>
+      </div>
+
+      <!-- 2. ウレタン船体のアップ -->
+      <!-- TODO: ウレタン船体のアップ写真に差し替え(軽さ・耐衝撃性が伝わるアングルで撮影予定) -->
+      <div class="g-slide">
+        <div class="g-media placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M8 6l1.6-2.5h4.8L16 6"/><circle cx="12" cy="12.5" r="3.4"/></svg>
+          <span>撮影予定</span>
+        </div>
+        <div class="g-caption">
+          <span class="g-tag is-pending">ウレタン船体のアップ</span>
+          <p>軽さと耐衝撃性の根拠となる、ウレタン素材そのもののクローズアップ。撮影準備中です。</p>
+        </div>
+      </div>
+
+      <!-- 3. プロペラ / モーターまわり -->
+      <div class="g-slide">
+        <div class="g-media has-photo" data-lightbox-src="img02.jpg" data-lightbox-caption="プロペラ/モーターまわり — 背面ショット">
+          <img src="img02.jpg" alt="JFF-01 プロペラとモーターまわり(背面)" loading="lazy">
+        </div>
+        <div class="g-caption">
+          <span class="g-tag">プロペラ / モーターまわり</span>
+          <p>推進力の根拠となる、電動モーターと大型プロペラの背面ショット。</p>
+        </div>
+      </div>
+
+      <!-- 4. ノズルと散布の様子 -->
+      <!-- TODO: ノズル・散布中の写真(または動画からのキャプチャ)に差し替え -->
+      <div class="g-slide">
+        <div class="g-media placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v6M8.5 6.2L12 9l3.5-2.8M5 21c1-5.2 3-8 7-8s6 2.8 7 8"/></svg>
+          <span>撮影予定</span>
+        </div>
+        <div class="g-caption">
+          <span class="g-tag is-pending">ノズルと散布の様子</span>
+          <p>実際の散布性能を示す、ノズルからの噴射・散布中のカット。撮影準備中です。</p>
+        </div>
+      </div>
+
+      <!-- 5. 人が持ち上げる or 軽トラに積載(現状なし、要撮影) -->
+      <!-- TODO: 現状なし。人が持ち上げる、または軽トラに積載したカットを要撮影 -->
+      <div class="g-slide">
+        <div class="g-media placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V10l8-6 8 6v11M9 21v-6h6v6"/></svg>
+          <span>撮影予定</span>
+        </div>
+        <div class="g-caption">
+          <span class="g-tag is-pending">持ち上げ / 軽トラ積載</span>
+          <p>サイズ感が伝わる、人が持ち上げる、または軽トラに積み込むシーン。現状なし・要撮影。</p>
+        </div>
+      </div>
+
+      <!-- 6. 田んぼでの実走カット -->
+      <!-- TODO: 田んぼでの実走(稼働中)カットに差し替え -->
+      <div class="g-slide">
+        <div class="g-media placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17c2-4 4-6 9-6s7 2 9 6M5 21h14"/></svg>
+          <span>撮影予定</span>
+        </div>
+        <div class="g-caption">
+          <span class="g-tag is-pending">田んぼでの実走カット</span>
+          <p>水田で実際に走行し、散布ボートとして稼働している様子。撮影準備中です。</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Gallery lightbox (tap to enlarge) -->
+  <div class="lightbox" id="galleryLightbox" role="dialog" aria-modal="true" aria-label="写真拡大表示">
+    <button type="button" class="lightbox-close" id="lightboxClose" aria-label="閉じる">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <img id="lightboxImg" src="" alt="">
+    <div class="lightbox-caption" id="lightboxCaption"></div>
+  </div>
+</section>
+
+<!-- ─── Features ─── -->
+<section class="features" id="features">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">FEATURES</div>
+      <h2>こだわり抜いた、<br>3つの設計。</h2>
+    </div>
+  </div>
+
+  <div class="feat-blocks">
+
+    <!-- 船体 -->
+    <div class="feat-block reveal">
+      <div class="fb-img">
+        <img src="img01.jpg" alt="ウレタン船体">
+      </div>
+      <div class="fb-body">
+        <span class="fb-tag">Hull / 船体</span>
+        <h3>旋回性と安定性を<br>両立させた軽量船体。</h3>
+        <ul class="feat-list">
+          <li>耐久性のある軽量ウレタンフォームを使用し、独自の加工技術により優れた旋回性と安定した走行性を実現。</li>
+          <li>ウレタンのプロが素材から選定し、試行錯誤を重ねた独特なカッティングにより、素早いターンと高い直進安定性を誇る。</li>
+          <li>多少の衝撃でも吸収できるウレタンならではの耐久性と軽量性を両立している。</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 動力部 -->
+    <div class="feat-block rev reveal">
+      <div class="fb-img">
+        <img src="img06.jpg" alt="電動モーター・プロペラ">
+      </div>
+      <div class="fb-body">
+        <span class="fb-tag">Powertrain / 動力部</span>
+        <h3>トルクフルな発進と<br>クリーンな電動推進。</h3>
+        <ul class="feat-list">
+          <li>ハイパワーな電動モーターと13インチの大型プロペラにより、トルクフルな発進と安定した高速走行を実現。</li>
+          <li>燃料不要の電動モーターを採用することでメンテナンスが容易になり、環境負荷も低減。</li>
+          <li>18V 6Ahバッテリー1つで約1.5haの散布が可能（面積あたりの散布時間により変動）。</li>
+          <li>2枚の大型ラダーを採用し、機敏な動きと素早いターンを実現。</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── Pump / Gyro (スペック) ─── -->
+<section class="specs" id="specs">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">PUMP & CONTROL / SPEC</div>
+      <h2>散布性能と操縦性。</h2>
+    </div>
+    <div class="spec-grid reveal">
+      <div class="spec-card">
+        <span class="sc-tag">Pump / ポンプ</span>
+        <h3>精密に、確実に。<br>高性能ダイヤフラムポンプ。</h3>
+        <p>耐久性・耐薬品性に優れたサントプレン製ダイヤフラムを採用した高性能ポンプを搭載。吐出量は500ml/分〜5.6L/分までダイヤルで無段階に調整可能。同一吐出量でのON/OFFはもちろん、スロットルと連動した吐出切り替えにも対応し、圃場の状況に合わせた柔軟な散布を実現します。</p>
+      </div>
+      <div class="spec-card">
+        <span class="sc-tag">Gyro / 操縦性</span>
+        <h3>ジャイロ内蔵で、<br>直進性とターンが安定。</h3>
+        <p>ジャイロセンサーを内蔵することで、風や水流の影響を受けにくい安定した直進走行を実現。ターン時も姿勢を素早く修正し、意図した軌跡で散布エリアをカバーできます。リモコン操作に不慣れな方でも扱いやすい制御性を提供します。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Process ─── -->
+<section class="process" id="howto">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">HOW IT WORKS</div>
+      <h2>使い方は、3ステップ。</h2>
+      <p>重い動噴を背負って歩き回る作業はもう必要ありません。あぜ道から機体を走らせるだけです。</p>
+    </div>
+    <div class="steps reveal">
+      <div class="step">
+        <span class="snum">01</span>
+        <h3>準備する</h3>
+        <p>タンクに薬剤を充填し、バッテリーをセット。機体を田んぼのそばまで運びます。</p>
+      </div>
+      <div class="step">
+        <span class="snum">02</span>
+        <h3>走らせる</h3>
+        <p>リモコンで操作し、プロペラ推進で水面を走らせます。ジャイロで直進・旋回を安定制御。</p>
+      </div>
+      <div class="step">
+        <span class="snum">03</span>
+        <h3>散布する</h3>
+        <p>走行しながらダイヤフラムポンプで薬剤を散布。スロットル連動で散布量もコントロール。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Experience cards: 操船シミュレーター / カラーシミュレーター へ誘導 ─── -->
+<section class="experience" id="experience">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">TRY IT YOURSELF</div>
+      <h2>ブラウザで、<br>体験する。</h2>
+      <p>実機に触れる前に、ブラウザ上で操縦感覚とカラーの仕上がりを確認いただけます。</p>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="exp-grid reveal">
+      <a class="exp-card" href="simulator.html">
+        <span class="exp-tag">操船トレーニング</span>
+        <h3>ブラウザで操船を<br>体験できます。</h3>
+        <p>Uターンして機体がこちら向きになった瞬間、舵の左右感覚は入れ替わります。実機に乗る前に、シミュレーターで操縦感覚を練習できます。</p>
+        <span class="exp-cta">操船シミュレーターを開く
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+      <a class="exp-card" href="color.html">
+        <span class="exp-tag">カラーシミュレーション</span>
+        <h3>本体カラーをその場で<br>確認できます。</h3>
+        <p>船体のブルー部分の色を自由に選んで、仕上がりイメージを確認できます。黒のデッキカバー・ボトム・カーボンフレームの色は変わりません。</p>
+        <span class="exp-cta">カラーシミュレーターを開く
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FAQ ───
+     以下は仮の質問・回答です。内容に合わせて自由に書き換えてください。
+-->
+<section class="faq" id="faq">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">FAQ</div>
+      <h2>よくある質問</h2>
+    </div>
+    <div class="faq-list reveal">
+      <details class="faq-item">
+        <summary><span class="q-mark">Q</span><span>操縦は難しくないですか？</span><span class="icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+        </span></summary>
+        <div class="a-body"><span class="a-mark">A</span><p>ジャイロセンサーを内蔵しており、風や水流の影響を受けにくい安定した直進走行が可能です。初めての方は、上の「操船トレーニングシミュレーター」で事前に操縦感覚を練習いただけます。</p></div>
+      </details>
+      <details class="faq-item">
+        <summary><span class="q-mark">Q</span><span>バッテリーはどのくらい持ちますか？</span><span class="icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+        </span></summary>
+        <div class="a-body"><span class="a-mark">A</span><p>18V 6Ahバッテリー1個で約1.5haの散布が可能です（面積あたりの散布時間により変動します）。</p></div>
+      </details>
+      <details class="faq-item">
+        <summary><span class="q-mark">Q</span><span>薬剤の吐出量は調整できますか？</span><span class="icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+        </span></summary>
+        <div class="a-body"><span class="a-mark">A</span><p>高性能ダイヤフラムポンプにより、500ml/分〜5.6L/分の範囲でダイヤルにより無段階に調整可能です。スロットルと連動した吐出切り替えにも対応しています。</p></div>
+      </details>
+      <details class="faq-item">
+        <summary><span class="q-mark">Q</span><span>船体カラーは選べますか？</span><span class="icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+        </span></summary>
+        <div class="a-body"><span class="a-mark">A</span><p>船体のブルー部分の色は自由にお選びいただけます。上の「カラーシミュレーター」で仕上がりイメージを確認できます。黒のデッキカバー・ボトム・カーボンフレームの色は変更できません。</p></div>
+      </details>
+      <details class="faq-item">
+        <summary><span class="q-mark">Q</span><span>価格や納期を知りたいのですが？</span><span class="icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+        </span></summary>
+        <div class="a-body"><span class="a-mark">A</span><p>価格・納期は現在、個別にご案内しております。下記のお問い合わせフォームよりお気軽にご相談ください。</p></div>
+      </details>
+      <details class="faq-item">
+        <summary><span class="q-mark">Q</span><span>メンテナンスは大変ですか？</span><span class="icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+        </span></summary>
+        <div class="a-body"><span class="a-mark">A</span><p>燃料不要の電動モーターを採用しているため、エンジン式に比べてメンテナンスの手間を軽減しています。</p></div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Story ─── -->
+<section class="story">
+  <div class="wrap">
+    <div class="story-grid">
+      <div class="reveal">
+        <div class="eyebrow">OUR STORY</div>
+      </div>
+      <div class="reveal">
+        <blockquote>農家の負担を減らす。<br>それが、私たちの出発点。</blockquote>
+        <div class="body" style="margin-top:28px;">
+          <p>農薬散布は長らく重労働の代名詞でした。重い動噴を背負って田んぼを歩き回る作業は、真夏の炎天下では体に大きな負担がかかります。</p>
+          <p>YOSHIDA KAKOは、ウレタム素材のプロとして長年培ってきた加工技術と、電動推進システムを組み合わせることで、「水面を走る散布ボート」という新しいアプローチで、この課題に向き合っています。</p>
+          <p>田んぼのそばに立ち、機体を走らせるだけ ー そんな当たり前のように見える未来を、一台ずつ丁寧に作り届けます。</p>
+        </div>
+        <div class="signature">— YOSHIDA KAKO 開発チーム</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Contact ─── -->
+<section class="contact" id="contact">
+  <!-- モバイル固定CTAバー: このマーカーが画面に入ったらバーを非表示にする -->
+  <div id="ctaBarHide" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">CONTACT</div>
+      <h2>お問い合わせ</h2>
+      <p>製品の資料請求・価格・導入に関するご相談はこちらから。お気軽にどうぞ。</p>
+    </div>
+    <div class="contact-grid">
+      <form class="reveal" action="mailto:contact@example.com" method="post" enctype="text/plain">
+        <div class="field">
+          <label for="name">お名前</label>
+          <input id="name" name="name" type="text" required>
+        </div>
+        <div class="field">
+          <label for="org">会社・法人名</label>
+          <input id="org" name="org" type="text">
+        </div>
+        <div class="field">
+          <label for="email">メールアドレス</label>
+          <input id="email" name="email" type="email" required>
+        </div>
+        <div class="field">
+          <label for="message">お問い合わせ内容</label>
+          <textarea id="message" name="message" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" style="border:none;cursor:pointer;">送信する</button>
+      </form>
+      <div class="contact-info reveal">
+        <div class="row"><div class="k">Mail</div><div class="placeholder" data-field="email">準備中</div></div>
+        <div class="row"><div class="k">Tel</div><div class="placeholder" data-field="tel">準備中</div></div>
+        <div class="row"><div class="k">Address</div><div class="placeholder" data-field="address">準備中</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <a class="f-logo" href="index.html">吉田化工<span>株式会社</span></a>
+    <div class="f-links">
+      <a href="simulator.html">操船シミュレーター</a>
+      <a href="color.html">カラーシミュレーター</a>
+      <a href="company.html">会社概要</a>
+      <a href="#contact">お問い合わせ</a>
+    </div>
+    <div class="copy">&copy; 2026 YOSHIDA KAKO. All rights reserved.</div>
+  </div>
+</footer>
+
+<!-- ─── モバイル固定CTAバー ─── -->
+<div class="mobile-cta-bar" id="mobileCtaBar">
+  <a href="#contact" class="btn btn-primary">お見積り・資料請求はこちら</a>
+</div>
+
+<!-- ─── トップへ戻るボタン ─── -->
+<a href="#top" class="back-to-top" id="backToTop" aria-label="トップへ戻る">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</a>
+
+<script src="common.js"></script>
+</body>
+</html>
