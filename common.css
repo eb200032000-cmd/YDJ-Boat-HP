@@ -1,0 +1,187 @@
+/* ============================================================
+   common.css — サイト全体で共有するスタイル
+   (ヘッダー / フッター / ハンバーガーメニュー / トップへ戻るボタン /
+    モバイル固定CTAバー / reveal演出 / 基本要素)
+   ページ固有のスタイルは各HTMLの <style> 側に書く。
+============================================================ */
+:root{
+  --bg:#0B0C0E;
+  --panel:#15171A;
+  --panel-2:#1B1E22;
+  --ink:#ECEDEF;
+  --ink-dim:#9AA0A6;
+  --accent:#FF6B1A;
+  --blue:#5FB8FF;
+  --green:#4FC97E;
+  --line:rgba(236,237,239,0.12);
+  --display:'Noto Sans JP',sans-serif;
+  --cond:'Oswald',sans-serif;
+  --mono:'JetBrains Mono',monospace;
+  --header-h:64px;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto;}}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--display);
+  font-weight:400;
+  line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;display:block;}
+a{color:inherit;}
+.wrap{max-width:1140px;margin:0 auto;padding:0 24px;}
+.eyebrow{
+  font-family:var(--cond);
+  text-transform:uppercase;
+  letter-spacing:.18em;
+  font-size:12px;
+  font-weight:600;
+  color:var(--accent);
+}
+h1,h2,h3{font-family:var(--display);font-weight:900;margin:0;letter-spacing:-0.01em;}
+:focus-visible{outline:2px solid var(--blue);outline-offset:3px;}
+
+.btn{
+  font-family:var(--cond);text-transform:uppercase;letter-spacing:.05em;font-size:13px;font-weight:600;
+  padding:14px 26px;border-radius:2px;text-decoration:none;display:inline-block;
+  transition:transform .15s,background .2s,color .2s;
+}
+.btn-primary{background:var(--accent);color:#15110A;}
+.btn-primary:hover{transform:translateY(-2px);}
+.btn-ghost{border:1px solid var(--line);color:var(--ink);}
+.btn-ghost:hover{border-color:var(--ink-dim);}
+
+/* ─── Generic section (used on sub-pages too) ─── */
+section{padding:120px 0;}
+.section-head{max-width:640px;margin-bottom:56px;}
+.section-head h2{font-size:clamp(28px,4vw,42px);margin-top:14px;}
+.section-head p{color:var(--ink-dim);margin-top:16px;font-size:16px;}
+
+/* ─── Reveal animation ─── */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease;}
+.reveal.is-visible{opacity:1;transform:translateY(0);}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none;}}
+
+/* ============================================================
+   Header / Navigation
+============================================================ */
+header{
+  position:fixed;top:0;left:0;right:0;z-index:50;
+  background:rgba(11,12,14,.82);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:var(--header-h);max-width:1360px;}
+.logo{font-family:var(--cond);font-weight:700;letter-spacing:.04em;font-size:15px;text-decoration:none;}
+.logo span{color:var(--accent);}
+
+nav#siteNav ul{display:flex;gap:20px;list-style:none;margin:0;padding:0;flex-wrap:wrap;}
+nav#siteNav a{
+  font-family:var(--cond);font-size:12.5px;letter-spacing:.04em;text-transform:uppercase;
+  text-decoration:none;color:var(--ink-dim);transition:color .2s;position:relative;
+  padding:4px 0;white-space:nowrap;
+}
+nav#siteNav a:hover{color:var(--ink);}
+nav#siteNav a.active{color:var(--ink);}
+nav#siteNav a.active::after{
+  content:'';position:absolute;left:0;right:0;bottom:-6px;height:2px;background:var(--accent);
+}
+nav#siteNav li.nav-sep{width:1px;background:var(--line);margin:2px 2px;align-self:stretch;}
+
+.nav-toggle{
+  display:none;background:none;border:0;padding:10px;margin:-10px;cursor:pointer;
+  flex-direction:column;justify-content:center;gap:5px;
+}
+.nav-toggle span{display:block;width:22px;height:2px;background:var(--ink);transition:transform .2s,opacity .2s;}
+.nav-toggle[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.nav-toggle[aria-expanded="true"] span:nth-child(2){opacity:0;}
+.nav-toggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+@media(max-width:1180px){
+  .nav-toggle{display:flex;}
+  nav#siteNav{
+    position:fixed;top:var(--header-h);left:0;right:0;
+    background:rgba(11,12,14,.98);backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+    max-height:0;overflow:hidden;transition:max-height .25s ease;
+  }
+  nav#siteNav.is-open{max-height:calc(100vh - var(--header-h));overflow-y:auto;}
+  nav#siteNav ul{flex-direction:column;gap:0;padding:8px 0;}
+  nav#siteNav li.nav-sep{display:none;}
+  nav#siteNav a{display:block;padding:14px 24px;font-size:14px;}
+  nav#siteNav a.active::after{display:none;}
+  nav#siteNav a.active{color:var(--accent);}
+}
+
+/* ============================================================
+   Sub-page intro banner (simulator / color / company)
+============================================================ */
+.page-banner{
+  padding:calc(var(--header-h) + 64px) 0 64px;
+  background:var(--panel);
+  border-bottom:1px solid var(--line);
+}
+.page-banner .back-link{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--cond);font-size:12px;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--ink-dim);text-decoration:none;margin-bottom:22px;transition:color .2s;
+}
+.page-banner .back-link:hover{color:var(--ink);}
+.page-banner h1{font-size:clamp(26px,4.2vw,40px);margin-top:14px;line-height:1.3;}
+.page-banner p.lead{color:var(--ink-dim);margin-top:16px;max-width:56ch;font-size:15.5px;}
+
+/* ============================================================
+   Footer
+============================================================ */
+footer{border-top:1px solid var(--line);padding:32px 0 calc(32px + env(safe-area-inset-bottom,0px));}
+footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
+footer .f-links{display:flex;gap:20px;flex-wrap:wrap;}
+footer .f-links a{
+  font-family:var(--cond);font-size:12px;letter-spacing:.05em;text-transform:uppercase;
+  color:var(--ink-dim);text-decoration:none;transition:color .2s;
+}
+footer .f-links a:hover{color:var(--ink);}
+footer .f-logo{font-family:var(--cond);font-size:13px;letter-spacing:.06em;color:var(--ink-dim);text-decoration:none;}
+footer .f-logo span{color:var(--accent);}
+footer .copy{font-family:var(--mono);font-size:11px;color:var(--ink-dim);width:100%;padding-top:12px;border-top:1px solid var(--line);margin-top:8px;}
+
+/* ============================================================
+   Mobile CTA bar (fixed, bottom)
+============================================================ */
+.mobile-cta-bar{
+  position:fixed;left:0;right:0;bottom:0;z-index:60;
+  padding:12px 16px calc(12px + env(safe-area-inset-bottom,0px));
+  background:rgba(11,12,14,.96);backdrop-filter:blur(10px);
+  border-top:1px solid var(--line);
+  display:none;
+  transform:translateY(100%);
+  transition:transform .25s ease;
+}
+.mobile-cta-bar.is-visible{transform:translateY(0);}
+.mobile-cta-bar a.btn{width:100%;text-align:center;}
+@media(max-width:720px){
+  .mobile-cta-bar{display:block;}
+}
+
+/* ============================================================
+   Back-to-top button
+============================================================ */
+.back-to-top{
+  position:fixed;right:20px;bottom:20px;z-index:55;
+  width:46px;height:46px;border-radius:50%;
+  background:var(--panel-2);border:1px solid var(--line);color:var(--ink);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;text-decoration:none;
+  opacity:0;visibility:hidden;transform:translateY(10px);
+  transition:opacity .2s ease,transform .2s ease,visibility .2s,bottom .2s ease;
+}
+.back-to-top.is-visible{opacity:1;visibility:visible;transform:translateY(0);}
+.back-to-top:hover{border-color:var(--ink-dim);}
+.back-to-top svg{width:18px;height:18px;}
+@media(max-width:720px){
+  body.cta-bar-active .back-to-top{bottom:84px;}
+}
