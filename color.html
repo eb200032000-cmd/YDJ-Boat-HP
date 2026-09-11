@@ -41,6 +41,16 @@
 <link rel="stylesheet" href="common.css">
 <style>
   .sim-section{background:var(--bg);padding:0 0 120px;}
+  .sim-tabs{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap;}
+  .sim-tab{
+    font-family:'Noto Sans JP',sans-serif;text-align:left;
+    background:var(--panel);border:1px solid var(--line);border-radius:6px;
+    color:var(--ink-dim);padding:12px 20px;cursor:pointer;transition:border-color .15s,color .15s;
+  }
+  .sim-tab:hover{border-color:var(--ink-dim);color:var(--ink);}
+  .sim-tab.active{border-color:var(--accent);color:var(--ink);}
+  .sim-tab .sim-tab-title{display:block;font-size:14px;font-weight:700;}
+  .sim-tab .sim-tab-sub{display:block;font-weight:400;font-size:11.5px;margin-top:3px;color:var(--ink-dim);}
   .sim-frame-wrap{
     background:var(--panel);border:1px solid var(--line);border-radius:4px;overflow:hidden;
   }
@@ -87,7 +97,7 @@
     </a>
     <div class="eyebrow">COLOR SIMULATION</div>
     <h1>船体カラー<br>シミュレーション。</h1>
-    <p class="lead">船体のブルー部分の色を自由に選んで、仕上がりイメージを確認できます。黒のデッキカバー・ボトム・カーボンフレームの色は変わりません。</p>
+    <p class="lead">船体のブルー部分の色を自由に選んで、仕上がりイメージを確認できます。黒のデッキカバー・ボトム・カーボンフレームの色は変わりません。A・B 2種類のボディーパターンを切り替えてご覧いただけます。</p>
     <div class="cta-row" style="margin-top:28px;display:flex;gap:14px;flex-wrap:wrap;">
       <a href="index.html#contact" class="btn btn-primary">お見積り・資料について問い合わせる</a>
       <a href="simulator.html" class="btn btn-ghost">操船シミュレーターを見る</a>
@@ -100,12 +110,43 @@
 <!-- ─── Color simulator ─── -->
 <section class="sim-section">
   <div class="wrap">
-    <div class="sim-frame-wrap reveal">
-      <iframe src="boat-hull-viewer.html" title="船体カラーシミュレーター" loading="lazy" data-autoresize></iframe>
+    <div class="sim-tabs reveal" role="tablist" aria-label="ボディーカラーパターン選択">
+      <button type="button" class="sim-tab active" id="simTabA" data-target="simFrameA" role="tab" aria-selected="true">
+        <span class="sim-tab-title">ボディーカラー A パターン</span>
+        <span class="sim-tab-sub">現行ボディー</span>
+      </button>
+      <button type="button" class="sim-tab" id="simTabB" data-target="simFrameB" role="tab" aria-selected="false">
+        <span class="sim-tab-title">ボディーカラー B パターン</span>
+        <span class="sim-tab-sub">新型ボディー</span>
+      </button>
+    </div>
+    <div class="sim-frame-wrap reveal" id="simFrameA">
+      <iframe src="boat-hull-viewer.html" title="船体カラーシミュレーター（Aパターン）" loading="lazy" data-autoresize></iframe>
+    </div>
+    <div class="sim-frame-wrap reveal" id="simFrameB" hidden>
+      <iframe src="boat-hull-viewer-b.html" title="船体カラーシミュレーター（Bパターン）" loading="lazy" data-autoresize></iframe>
     </div>
     <p class="sim-notes reveal">※ 実際の仕上がりは、光の当たり方や素材の質感により多少異なる場合があります。おおよそのイメージ確認としてご利用ください。</p>
   </div>
 </section>
+
+<script>
+(function(){
+  var tabs = document.querySelectorAll('.sim-tab');
+  var panels = { simFrameA: document.getElementById('simFrameA'), simFrameB: document.getElementById('simFrameB') };
+  tabs.forEach(function(tab){
+    tab.addEventListener('click', function(){
+      tabs.forEach(function(t){ t.classList.remove('active'); t.setAttribute('aria-selected', 'false'); });
+      tab.classList.add('active');
+      tab.setAttribute('aria-selected', 'true');
+      var target = tab.getAttribute('data-target');
+      Object.keys(panels).forEach(function(key){
+        panels[key].hidden = (key !== target);
+      });
+    });
+  });
+})();
+</script>
 
 <footer>
   <div id="ctaBarHide" aria-hidden="true"></div>
