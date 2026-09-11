@@ -224,14 +224,11 @@
   }
   .exp-card .exp-cta svg{width:14px;height:14px;transition:transform .2s;}
   .exp-card:hover .exp-cta svg{transform:translateX(4px);}
-  .exp-icon{
-    width:56px;height:56px;border-radius:50%;flex-shrink:0;margin-bottom:22px;
-    background:var(--panel-2);border:1px solid var(--line);color:var(--accent);
-    display:flex;align-items:center;justify-content:center;
-    transition:border-color .2s;
+  .exp-thumb{
+    display:block;align-self:flex-start;height:96px;width:auto;max-width:100%;
+    border-radius:10px;border:1px solid var(--line);margin-bottom:22px;
+    background:var(--panel-2);object-fit:cover;
   }
-  .exp-card:hover .exp-icon{border-color:var(--accent);}
-  .exp-icon svg{width:28px;height:28px;}
 
   /* ─── FAQ ─── */
   .faq{background:var(--bg);}
@@ -638,13 +635,7 @@
   <div class="wrap">
     <div class="exp-grid reveal">
       <a class="exp-card" href="simulator.html">
-        <span class="exp-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="8"/>
-            <circle cx="12" cy="12" r="2.3"/>
-            <path d="M12 4v3.3M12 16.7V20M4 12h3.3M16.7 12H20M6.34 6.34l2.33 2.33M15.33 15.33l2.33 2.33M6.34 17.66l2.33-2.33M15.33 8.67l2.33-2.33"/>
-          </svg>
-        </span>
+        <img class="exp-thumb" src="icons/exp-simulator.png" alt="操縦リモコンのイメージ">
         <span class="exp-tag">操船トレーニング</span>
         <h3>ブラウザで操船を<br>体験できます。</h3>
         <p>Uターンして機体がこちら向きになった瞬間、舵の左右感覚は入れ替わります。実機に乗る前に、シミュレーターで操縦感覚を練習できます。</p>
@@ -653,15 +644,7 @@
         </span>
       </a>
       <a class="exp-card" href="color.html">
-        <span class="exp-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 3a9 9 0 1 0 0 18c1.1 0 2-.9 2-2 0-.5-.2-1-.5-1.4-.3-.4-.5-.9-.5-1.4 0-1.1.9-2 2-2h1.8c1.8 0 3.2-1.4 3.2-3.2C20 6.8 16.4 3 12 3z"/>
-            <circle cx="7.6" cy="10.6" r="1.1" fill="currentColor" stroke="none"/>
-            <circle cx="9.6" cy="7.2" r="1.1" fill="currentColor" stroke="none"/>
-            <circle cx="14" cy="6.6" r="1.1" fill="currentColor" stroke="none"/>
-            <circle cx="16.9" cy="9.6" r="1.1" fill="currentColor" stroke="none"/>
-          </svg>
-        </span>
+        <img class="exp-thumb" src="icons/exp-color.png" alt="ボディーカラー A/B パターンのイメージ">
         <span class="exp-tag">カラーシミュレーション</span>
         <h3>本体カラーをその場で<br>確認できます。</h3>
         <p>船体のブルー部分の色を自由に選んで、仕上がりイメージを確認できます。黒のデッキカバー・ボトム・カーボンフレームの色は変わりません。</p>
