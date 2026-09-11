@@ -225,9 +225,15 @@
   .exp-card .exp-cta svg{width:14px;height:14px;transition:transform .2s;}
   .exp-card:hover .exp-cta svg{transform:translateX(4px);}
   .exp-thumb{
-    display:block;align-self:flex-start;height:96px;width:auto;max-width:100%;
+    display:block;align-self:flex-start;height:auto;max-width:100%;
     border-radius:10px;border:1px solid var(--line);margin-bottom:22px;
-    background:var(--panel-2);object-fit:cover;
+    background:var(--panel-2);
+  }
+  .exp-thumb.is-remote{width:200px;}
+  .exp-thumb.is-color{width:340px;}
+  @media(max-width:480px){
+    .exp-thumb.is-remote{width:160px;}
+    .exp-thumb.is-color{width:100%;}
   }
 
   /* ─── FAQ ─── */
@@ -635,7 +641,7 @@
   <div class="wrap">
     <div class="exp-grid reveal">
       <a class="exp-card" href="simulator.html">
-        <img class="exp-thumb" src="icons/exp-simulator.png" alt="操縦リモコンのイメージ">
+        <img class="exp-thumb is-remote" src="icons/exp-simulator.png" alt="操縦リモコンのイメージ">
         <span class="exp-tag">操船トレーニング</span>
         <h3>ブラウザで操船を<br>体験できます。</h3>
         <p>Uターンして機体がこちら向きになった瞬間、舵の左右感覚は入れ替わります。実機に乗る前に、シミュレーターで操縦感覚を練習できます。</p>
@@ -644,7 +650,7 @@
         </span>
       </a>
       <a class="exp-card" href="color.html">
-        <img class="exp-thumb" src="icons/exp-color.png" alt="ボディーカラー A/B パターンのイメージ">
+        <img class="exp-thumb is-color" src="icons/exp-color.png" alt="ボディーカラー A/B パターンのイメージ">
         <span class="exp-tag">カラーシミュレーション</span>
         <h3>本体カラーをその場で<br>確認できます。</h3>
         <p>船体のブルー部分の色を自由に選んで、仕上がりイメージを確認できます。黒のデッキカバー・ボトム・カーボンフレームの色は変わりません。</p>
