@@ -112,6 +112,9 @@
   }
   .g-media.placeholder svg{width:28px;height:28px;opacity:.55;}
   .g-media.placeholder span{font-family:var(--cond);font-size:11px;letter-spacing:.08em;text-transform:uppercase;}
+  .g-media.is-contain{background:#0c0d10;}
+  .g-media.is-contain img{object-fit:contain;object-position:center;}
+  .g-media.is-contain:hover img{transform:none;}
   .g-caption{padding:16px 18px 20px;}
   .g-tag{font-family:var(--cond);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);}
   .g-tag.is-pending{color:var(--ink-dim);}
@@ -221,6 +224,14 @@
   }
   .exp-card .exp-cta svg{width:14px;height:14px;transition:transform .2s;}
   .exp-card:hover .exp-cta svg{transform:translateX(4px);}
+  .exp-icon{
+    width:56px;height:56px;border-radius:50%;flex-shrink:0;margin-bottom:22px;
+    background:var(--panel-2);border:1px solid var(--line);color:var(--accent);
+    display:flex;align-items:center;justify-content:center;
+    transition:border-color .2s;
+  }
+  .exp-card:hover .exp-icon{border-color:var(--accent);}
+  .exp-icon svg{width:28px;height:28px;}
 
   /* ─── FAQ ─── */
   .faq{background:var(--bg);}
@@ -300,20 +311,6 @@
     color:var(--accent);letter-spacing:.02em;
   }
 
-  /* ─── 導入事例・お客様の声 ─── */
-  .testimonials{background:var(--bg);}
-  .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);}
-  @media(max-width:900px){.testi-grid{grid-template-columns:1fr;}}
-  .testi-card{background:var(--panel);padding:36px 32px;display:flex;flex-direction:column;gap:18px;}
-  .testi-avatar{
-    width:52px;height:52px;border-radius:50%;background:var(--panel-2);border:1px dashed var(--line);
-    display:flex;align-items:center;justify-content:center;color:var(--ink-dim);flex-shrink:0;
-  }
-  .testi-avatar svg{width:22px;height:22px;}
-  .testi-quote{color:var(--ink-dim);font-size:14.5px;line-height:1.8;min-height:5.4em;font-style:italic;}
-  .testi-meta{border-top:1px solid var(--line);padding-top:14px;}
-  .testi-meta .name{font-size:14px;font-weight:700;color:var(--ink);}
-  .testi-meta .role{font-family:var(--mono);font-size:11.5px;color:var(--ink-dim);margin-top:4px;text-transform:uppercase;letter-spacing:.04em;}
 </style>
 </head>
 <body id="top">
@@ -342,7 +339,6 @@
         <li><a href="index.html#specs" data-nav="specs">スペック</a></li>
         <li><a href="index.html#spec-table" data-nav="spec-table">諸元表</a></li>
         <li><a href="index.html#faq" data-nav="faq">よくある質問</a></li>
-        <li><a href="index.html#testimonials" data-nav="testimonials">お客様の声</a></li>
         <li class="nav-sep" aria-hidden="true"></li>
         <li><a href="simulator.html" data-nav="simulator">操船シミュレーター</a></li>
         <li><a href="color.html" data-nav="color">カラーシミュレーター</a></li>
@@ -399,7 +395,7 @@
       <div class="section-head">
         <div class="eyebrow">GALLERY</div>
         <h2>証拠写真で見る、JFF-01。</h2>
-        <p>全景から船体・推進部・散布シーンまで、1枚ごとに見どころを絞った構成です。</p>
+        <p>全景から船体・散布シーンまで、1枚ごとに見どころを絞った構成です。</p>
       </div>
       <div class="gallery-nav">
         <button type="button" id="galPrev" aria-label="前の写真へ">
@@ -415,69 +411,58 @@
   <div class="wrap">
     <div class="gallery-carousel reveal" id="galleryCarousel">
 
-      <!-- 1. 全景(製品の顔) -->
+      <!-- 1. 全景 -->
       <div class="g-slide">
-        <div class="g-media has-photo" data-lightbox-src="img05.jpg" data-lightbox-caption="全景(製品の顔) — 田んぼのそばに置いた実機">
+        <div class="g-media has-photo" data-lightbox-src="img05.jpg" data-lightbox-caption="実機の全景 — 水田のそばに置いた様子">
           <img src="img05.jpg" alt="JFF-01 全景。田んぼのそばに置いた実機" loading="lazy">
         </div>
         <div class="g-caption">
-          <span class="g-tag">全景(製品の顔)</span>
-          <p>田んぼのそばに置いた実機の全体像。カーボン柄フレームと軽量ウレタン船体のシルエットがひと目で伝わります。</p>
+          <span class="g-tag">実機の全景</span>
+          <p>水田のそばに置いた実機の全体像です。カーボン柄フレームと軽量ウレタン船体のシルエットをご確認いただけます。</p>
         </div>
       </div>
 
-      <!-- 2. カーボンフレームのアップ -->
+      <!-- 2. カーボンフレーム -->
       <div class="g-slide">
-        <div class="g-media has-photo" data-lightbox-src="img10.jpg" data-lightbox-caption="カーボンフレームのアップ — 動力部まわりのクローズアップ">
-          <img src="img10.jpg" alt="JFF-01 カーボン柄フレームと動力部のクローズアップ" loading="lazy">
+        <div class="g-media has-photo is-contain" data-lightbox-src="img10.jpg" data-lightbox-caption="カーボンフレームのクローズアップ">
+          <img src="img10.jpg" alt="JFF-01 カーボン柄フレームのクローズアップ" loading="lazy">
         </div>
         <div class="g-caption">
-          <span class="g-tag">カーボンフレームのアップ</span>
-          <p>船体を守るカーボン柄フレームと、内部の動力部まわりのクローズアップ。頑丈な作りが伝わります。</p>
+          <span class="g-tag">カーボンフレーム</span>
+          <p>船体を守るカーボン柄フレームのクローズアップです。頑丈な作りをご確認いただけます。</p>
         </div>
       </div>
 
-      <!-- 3. プロペラ / モーターまわり -->
+      <!-- 3. 散布の様子 -->
       <div class="g-slide">
-        <div class="g-media has-photo" data-lightbox-src="img02.jpg" data-lightbox-caption="プロペラ/モーターまわり — 背面ショット">
-          <img src="img02.jpg" alt="JFF-01 プロペラとモーターまわり(背面)" loading="lazy">
-        </div>
-        <div class="g-caption">
-          <span class="g-tag">プロペラ / モーターまわり</span>
-          <p>推進力の根拠となる、電動モーターと大型プロペラの背面ショット。</p>
-        </div>
-      </div>
-
-      <!-- 4. ノズルと散布の様子 -->
-      <div class="g-slide">
-        <div class="g-media has-photo" data-lightbox-src="img07.jpg" data-lightbox-caption="ノズルと散布の様子 — 実際の噴射シーン">
+        <div class="g-media has-photo" data-lightbox-src="img07.jpg" data-lightbox-caption="散布の様子 — ノズルからの薬剤噴射">
           <img src="img07.jpg" alt="JFF-01 ノズルからの薬剤噴射・散布の様子" loading="lazy">
         </div>
         <div class="g-caption">
-          <span class="g-tag">ノズルと散布の様子</span>
-          <p>実際の散布性能を示す、ノズルからの噴射・散布中のカット。</p>
+          <span class="g-tag">散布の様子</span>
+          <p>ノズルから薬剤を噴射し、実際に散布している様子です。散布性能をご確認いただけます。</p>
         </div>
       </div>
 
-      <!-- 5. サイズ感(メジャー計測) -->
+      <!-- 4. サイズ感 -->
       <div class="g-slide">
-        <div class="g-media has-photo" data-lightbox-src="img08.jpg" data-lightbox-caption="サイズ感がわかるメジャー計測ショット">
+        <div class="g-media has-photo" data-lightbox-src="img08.jpg" data-lightbox-caption="サイズ感 — メジャーで計測した様子">
           <img src="img08.jpg" alt="JFF-01 メジャーを並べて撮影したサイズ感がわかるカット" loading="lazy">
         </div>
         <div class="g-caption">
-          <span class="g-tag">サイズ感(実測)</span>
-          <p>メジャーを並べて撮影した1枚。持ち運びや積み込みの際の目安になる、実際のサイズ感が伝わります。</p>
+          <span class="g-tag">サイズ感</span>
+          <p>メジャーを並べて撮影し、実際のサイズ感をご確認いただけます。持ち運びや積み込みの際の目安になります。</p>
         </div>
       </div>
 
-      <!-- 6. 田んぼでの実走カット -->
+      <!-- 5. 実走の様子 -->
       <div class="g-slide">
-        <div class="g-media has-photo" data-lightbox-src="img09.jpg" data-lightbox-caption="田んぼでの実走カット — 稼働中の様子">
+        <div class="g-media has-photo" data-lightbox-src="img09.jpg" data-lightbox-caption="実走の様子 — 水田で稼働中">
           <img src="img09.jpg" alt="JFF-01 田んぼで実際に走行している様子" loading="lazy">
         </div>
         <div class="g-caption">
-          <span class="g-tag">田んぼでの実走カット</span>
-          <p>水田で実際に走行し、散布ボートとして稼働している様子。</p>
+          <span class="g-tag">実走の様子</span>
+          <p>水田で実際に走行し、散布ボートとして稼働している様子です。</p>
         </div>
       </div>
 
@@ -586,7 +571,7 @@
       </div>
       <div class="spec-table-item">
         <span class="k">薬液タンク容量</span>
-        <span class="v">5L<span class="note">仮値<!-- TODO: 実際のタンク容量に差し替え --></span></span>
+        <span class="v">5L</span>
       </div>
       <div class="spec-table-item">
         <span class="k">最大走行速度</span>
@@ -653,6 +638,13 @@
   <div class="wrap">
     <div class="exp-grid reveal">
       <a class="exp-card" href="simulator.html">
+        <span class="exp-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="8"/>
+            <circle cx="12" cy="12" r="2.3"/>
+            <path d="M12 4v3.3M12 16.7V20M4 12h3.3M16.7 12H20M6.34 6.34l2.33 2.33M15.33 15.33l2.33 2.33M6.34 17.66l2.33-2.33M15.33 8.67l2.33-2.33"/>
+          </svg>
+        </span>
         <span class="exp-tag">操船トレーニング</span>
         <h3>ブラウザで操船を<br>体験できます。</h3>
         <p>Uターンして機体がこちら向きになった瞬間、舵の左右感覚は入れ替わります。実機に乗る前に、シミュレーターで操縦感覚を練習できます。</p>
@@ -661,6 +653,15 @@
         </span>
       </a>
       <a class="exp-card" href="color.html">
+        <span class="exp-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3a9 9 0 1 0 0 18c1.1 0 2-.9 2-2 0-.5-.2-1-.5-1.4-.3-.4-.5-.9-.5-1.4 0-1.1.9-2 2-2h1.8c1.8 0 3.2-1.4 3.2-3.2C20 6.8 16.4 3 12 3z"/>
+            <circle cx="7.6" cy="10.6" r="1.1" fill="currentColor" stroke="none"/>
+            <circle cx="9.6" cy="7.2" r="1.1" fill="currentColor" stroke="none"/>
+            <circle cx="14" cy="6.6" r="1.1" fill="currentColor" stroke="none"/>
+            <circle cx="16.9" cy="9.6" r="1.1" fill="currentColor" stroke="none"/>
+          </svg>
+        </span>
         <span class="exp-tag">カラーシミュレーション</span>
         <h3>本体カラーをその場で<br>確認できます。</h3>
         <p>船体のブルー部分の色を自由に選んで、仕上がりイメージを確認できます。黒のデッキカバー・ボトム・カーボンフレームの色は変わりません。</p>
@@ -798,60 +799,6 @@
         </span></summary>
         <div class="a-body"><span class="a-mark">A</span><p>（仮回答）まずは下記のお問い合わせフォームよりご連絡ください。担当者より折り返しご案内いたします。具体的なお申し込みの流れは現在整備中です。</p></div>
       </details>
-    </div>
-  </div>
-</section>
-
-<!-- ─── 導入事例・お客様の声 ───
-     中身は空のテンプレートです。実際のお客様の声が集まり次第、
-     ご自身で書き換えてください(内容の捏造・仮の声の記載はしていません)。
-     カードの追加・削除は .testi-card ブロック単位で行えます。
--->
-<section class="testimonials" id="testimonials">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <div class="eyebrow">CASE STUDIES</div>
-      <h2>導入事例・<br>お客様の声。</h2>
-      <p>準備中です。導入いただいたお客様の声を、順次こちらに掲載していきます。</p>
-    </div>
-    <div class="testi-grid reveal">
-
-      <!-- TODO: お客様の声(1) を入力してください -->
-      <div class="testi-card">
-        <div class="testi-avatar" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c1.5-4.5 4.5-6 8-6s6.5 1.5 8 6"/></svg>
-        </div>
-        <p class="testi-quote">（ここにお客様の声を入力してください）</p>
-        <div class="testi-meta">
-          <div class="name">（お名前・法人名）</div>
-          <div class="role">（地域・作付け品目など）</div>
-        </div>
-      </div>
-
-      <!-- TODO: お客様の声(2) を入力してください -->
-      <div class="testi-card">
-        <div class="testi-avatar" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c1.5-4.5 4.5-6 8-6s6.5 1.5 8 6"/></svg>
-        </div>
-        <p class="testi-quote">（ここにお客様の声を入力してください）</p>
-        <div class="testi-meta">
-          <div class="name">（お名前・法人名）</div>
-          <div class="role">（地域・作付け品目など）</div>
-        </div>
-      </div>
-
-      <!-- TODO: お客様の声(3) を入力してください -->
-      <div class="testi-card">
-        <div class="testi-avatar" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c1.5-4.5 4.5-6 8-6s6.5 1.5 8 6"/></svg>
-        </div>
-        <p class="testi-quote">（ここにお客様の声を入力してください）</p>
-        <div class="testi-meta">
-          <div class="name">（お名前・法人名）</div>
-          <div class="role">（地域・作付け品目など）</div>
-        </div>
-      </div>
-
     </div>
   </div>
 </section>
