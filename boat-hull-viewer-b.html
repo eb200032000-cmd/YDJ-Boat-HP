@@ -51,6 +51,22 @@
     min-height:200px;
   }
   .canvas-wrap canvas{width:100%;height:auto;display:block;}
+  /* ── 表示する図の切り替え(スマホで1面ずつ大きく見るため) ── */
+  .view-tabs{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:12px;}
+  .view-tab{
+    min-height:44px;
+    background:var(--panel-2);border:1px solid var(--line);border-radius:8px;
+    color:var(--ink-dim);font-family:'Noto Sans JP',sans-serif;font-size:12px;
+    padding:8px 2px;cursor:pointer;white-space:nowrap;
+    transition:border-color .15s,color .15s,background .15s;
+  }
+  @media(max-width:420px){ .view-tab{font-size:11px;letter-spacing:-0.02em;} }
+  .view-tab:hover{border-color:var(--ink-dim);color:var(--ink);}
+  .view-tab[aria-selected="true"]{
+    border-color:var(--accent);color:var(--ink);background:rgba(255,107,26,.10);font-weight:700;
+  }
+  .view-tab:focus-visible{outline:2px solid var(--blue);outline-offset:2px;}
+  .view-hint{font-size:11.5px;color:var(--ink-dim);margin:8px 0 0;line-height:1.6;}
   .loading{padding:64px 0;font-size:13px;color:var(--ink-dim);}
   .color-row{
     display:flex;align-items:center;gap:12px;margin-top:16px;
@@ -94,6 +110,9 @@
     <canvas id="boatCanvas" style="display:none;"></canvas>
   </div>
 
+  <div class="view-tabs" id="viewTabs" role="tablist" aria-label="表示する図を選ぶ"></div>
+  <p class="view-hint">図をひとつ選ぶと大きく表示されます。スマートフォンでは初めから「斜め上方」を大きく表示しています。</p>
+
   <div class="color-row">
     <label for="colorPicker">本体カラーを選ぶ</label>
     <input type="color" id="colorPicker" value="#2E7FC4">
@@ -117,11 +136,26 @@
 
   const REF_LUM = 118; // 元画像のブルー部分の基準輝度
 
+  // ── 4面図の切り出し位置(画像全体に対する割合) ──
+  // 4面まとめてだと1面あたりが小さいため、1面だけを拡大表示できるようにする。
+  const SPLIT_X = 600 / 1195, SPLIT_Y = 448 / 896;
+  const VIEWS = [
+    { key:'all',   label:'4面',     x:0,       y:0,       w:1,         h:1         },
+    { key:'side',  label:'側面図',   x:0,       y:0,       w:SPLIT_X,   h:SPLIT_Y   },
+    { key:'top',   label:'斜め上方', x:SPLIT_X, y:0,       w:1-SPLIT_X, h:SPLIT_Y   },
+    { key:'front', label:'正面図',   x:0,       y:SPLIT_Y, w:SPLIT_X,   h:1-SPLIT_Y },
+    { key:'rear',  label:'後面図',   x:SPLIT_X, y:SPLIT_Y, w:1-SPLIT_X, h:1-SPLIT_Y },
+  ];
+  // 画面が狭いときは4面だと色を判断しづらいので、既定で斜め上方図を大きく出す
+  let currentView = (window.innerWidth <= 600) ? 'top' : 'all';
+  let fullCanvas = null;
+
   const canvas = document.getElementById('boatCanvas');
   const loadingMsg = document.getElementById('loadingMsg');
   const colorPicker = document.getElementById('colorPicker');
   const hexLabel = document.getElementById('hexLabel');
   const presetGrid = document.getElementById('presetGrid');
+  const viewTabs = document.getElementById('viewTabs');
 
   let baseData = null;
   let flags = null;
@@ -146,8 +180,9 @@
     });
   }
 
-  function render(){
-    if (!baseData || !flags || !canvas) return;
+  // 色替えした「画像全体」をオフスクリーンに描く(色替えの計算は従来どおり)
+  function paintFull(){
+    if (!baseData || !flags) return;
     const out = new Uint8ClampedArray(baseData);
     const t = hexToRgb(color);
 
@@ -161,8 +196,62 @@
       out[p+2] = Math.min(255, t.b * factor);
     }
 
+    if (!fullCanvas){
+      fullCanvas = document.createElement('canvas');
+      fullCanvas.width = width;
+      fullCanvas.height = height;
+    }
+    fullCanvas.getContext('2d').putImageData(new ImageData(out, width, height), 0, 0);
+  }
+
+  // 選ばれている図の範囲だけを切り出して表示する
+  function render(){
+    if (!baseData || !flags || !canvas) return;
+    paintFull();
+
+    const v = VIEWS.find(item => item.key === currentView) || VIEWS[0];
+    const sx = Math.round(v.x * width);
+    const sy = Math.round(v.y * height);
+    const sw = Math.round(v.w * width);
+    const sh = Math.round(v.h * height);
+
+    canvas.width = sw;
+    canvas.height = sh;
     const ctx = canvas.getContext('2d');
-    ctx.putImageData(new ImageData(out, width, height), 0, 0);
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = 'high';
+    ctx.clearRect(0, 0, sw, sh);
+    ctx.drawImage(fullCanvas, sx, sy, sw, sh, 0, 0, sw, sh);
+  }
+
+  function buildViewTabs(){
+    if (!viewTabs) return;
+    viewTabs.innerHTML = '';
+    VIEWS.forEach(v => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'view-tab';
+      btn.setAttribute('role', 'tab');
+      btn.setAttribute('aria-selected', v.key === currentView ? 'true' : 'false');
+      btn.dataset.view = v.key;
+      btn.textContent = v.label;
+      btn.addEventListener('click', () => setView(v.key));
+      viewTabs.appendChild(btn);
+    });
+  }
+
+  // ボタンを作り直すとキーボード操作時にフォーカスが外れるため、状態だけ更新する
+  function updateViewTabs(){
+    if (!viewTabs) return;
+    viewTabs.querySelectorAll('.view-tab').forEach(btn => {
+      btn.setAttribute('aria-selected', btn.dataset.view === currentView ? 'true' : 'false');
+    });
+  }
+
+  function setView(key){
+    currentView = key;
+    updateViewTabs();
+    render();
   }
 
   function buildPresets(){
@@ -225,6 +314,7 @@
     canvas.style.display = 'block';
 
     buildPresets();
+    buildViewTabs();
     render();
   }).catch(err => {
     loadingMsg.textContent = '画像の読み込みに失敗しました。';
