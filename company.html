@@ -42,7 +42,8 @@
 <style>
   .company-section{background:var(--bg);padding:0 0 120px;}
   .company table{width:100%;border-collapse:collapse;}
-  .company td{padding:18px 0;border-top:1px solid var(--line);font-size:15px;vertical-align:top;}
+  .company td{padding:18px 12px;margin:0 -12px;border-top:1px solid var(--line);font-size:15px;vertical-align:top;border-radius:var(--radius-sm);transition:background .2s;}
+  .company tr:hover td{background:rgba(236,237,239,.03);}
   .company tr:last-child td{border-bottom:1px solid var(--line);}
   .company td.k{
     width:180px;color:var(--ink-dim);font-family:var(--mono);font-size:12.5px;
@@ -52,6 +53,8 @@
 </style>
 </head>
 <body id="top" data-page="company">
+
+<a class="skip-link" href="#main-content">本文へスキップ</a>
 
 <script src="company-info.js"></script>
 
@@ -81,7 +84,7 @@
 </header>
 
 <!-- ─── Page banner ─── -->
-<section class="page-banner">
+<section class="page-banner" id="main-content" tabindex="-1">
   <div class="wrap">
     <a class="back-link" href="index.html">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>

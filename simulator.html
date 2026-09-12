@@ -42,7 +42,8 @@
 <style>
   .sim-section{background:var(--bg);padding:0 0 120px;}
   .sim-frame-wrap{
-    background:var(--panel);border:1px solid var(--line);border-radius:4px;overflow:hidden;
+    background:var(--panel);border:1px solid var(--line);border-radius:var(--radius-md);overflow:hidden;
+    box-shadow:var(--shadow-md);
   }
   .sim-frame-wrap iframe{
     width:100%;height:700px;border:0;display:block;background:#0a0d0f;
@@ -52,6 +53,8 @@
 </style>
 </head>
 <body id="top" data-page="simulator">
+
+<a class="skip-link" href="#main-content">本文へスキップ</a>
 
 <!-- ─── Header ─── -->
 <header>
@@ -79,7 +82,7 @@
 </header>
 
 <!-- ─── Page banner ─── -->
-<section class="page-banner">
+<section class="page-banner" id="main-content" tabindex="-1">
   <div class="wrap">
     <a class="back-link" href="index.html">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>

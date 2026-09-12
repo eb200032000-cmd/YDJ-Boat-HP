@@ -56,18 +56,37 @@
       linear-gradient(180deg,rgba(11,12,14,.5) 0%,rgba(11,12,14,.25) 30%,rgba(11,12,14,.6) 60%,rgba(11,12,14,.98) 100%),
       linear-gradient(90deg,rgba(11,12,14,.75) 0%,rgba(11,12,14,.1) 60%);
   }
+  .hero-glow{
+    position:absolute;z-index:1;left:50%;top:18%;width:min(70vw,820px);aspect-ratio:1/1;
+    transform:translateX(-38%);pointer-events:none;
+    background:radial-gradient(circle,rgba(255,107,26,.20) 0%,rgba(255,107,26,0) 62%);
+  }
   .hero-content{position:relative;z-index:2;width:100%;padding:160px 0 0;}
-  .hero h1{font-size:clamp(36px,7vw,74px);line-height:1.08;max-width:14ch;margin-top:16px;}
-  .hero p.lead{margin-top:22px;max-width:44ch;color:var(--ink-dim);font-size:17px;}
-  .cta-row{margin-top:34px;display:flex;gap:14px;flex-wrap:wrap;}
+  .hero-content .eyebrow{opacity:0;transform:translateY(10px);animation:heroIn .7s var(--ease-out) .05s forwards;}
+  .hero h1{font-size:clamp(36px,7vw,74px);line-height:1.08;max-width:14ch;margin-top:16px;
+    opacity:0;transform:translateY(14px);animation:heroIn .8s var(--ease-out) .15s forwards;}
+  .hero p.lead{margin-top:22px;max-width:44ch;color:var(--ink-dim);font-size:17px;
+    opacity:0;transform:translateY(14px);animation:heroIn .8s var(--ease-out) .28s forwards;}
+  .cta-row{margin-top:34px;display:flex;gap:14px;flex-wrap:wrap;
+    opacity:0;transform:translateY(14px);animation:heroIn .8s var(--ease-out) .4s forwards;}
+  @keyframes heroIn{to{opacity:1;transform:translateY(0);}}
+  @media(prefers-reduced-motion:reduce){
+    .hero-content .eyebrow,.hero h1,.hero p.lead,.cta-row{animation:none;opacity:1;transform:none;}
+  }
 
   /* ticker */
   .ticker{position:relative;z-index:2;margin-top:64px;border-top:1px solid var(--line);background:rgba(21,23,26,.65);}
   .ticker .wrap{display:grid;grid-template-columns:repeat(4,1fr);}
-  .ticker .item{padding:18px 18px 22px 0;border-right:1px solid var(--line);}
+  .ticker .item{position:relative;padding:20px 18px 22px 0;border-right:1px solid var(--line);}
+  .ticker .item::before{
+    content:'';position:absolute;top:0;left:0;width:28px;height:2px;
+    background:linear-gradient(90deg,var(--accent),var(--accent-2));
+  }
   .ticker .item:last-child{border-right:none;}
+  .ticker .k-row{display:flex;align-items:center;gap:8px;}
+  .ticker .k-row svg{width:15px;height:15px;color:var(--accent);flex-shrink:0;}
   .ticker .k{font-family:var(--mono);font-size:11px;color:var(--ink-dim);text-transform:uppercase;letter-spacing:.08em;}
-  .ticker .v{font-family:var(--mono);font-size:15px;color:var(--ink);margin-top:6px;line-height:1.4;}
+  .ticker .v{font-family:var(--mono);font-size:15px;color:var(--ink);margin-top:8px;line-height:1.4;}
   @media(max-width:720px){.ticker .wrap{grid-template-columns:repeat(2,1fr);}.hero-content{padding-top:120px;}}
   @media(max-width:480px){
     .ticker .wrap{grid-template-columns:1fr;}
@@ -84,11 +103,12 @@
     width:44px;height:44px;border-radius:50%;
     background:var(--panel-2);border:1px solid var(--line);color:var(--ink);
     display:flex;align-items:center;justify-content:center;cursor:pointer;
-    transition:border-color .2s,transform .15s,opacity .2s;
+    transition:border-color .2s,transform .15s var(--ease-out),opacity .2s,box-shadow .2s;
   }
-  .gallery-nav button:hover{border-color:var(--ink-dim);}
+  .gallery-nav button:hover{border-color:var(--accent);box-shadow:var(--shadow-glow);}
   .gallery-nav button:active{transform:scale(.94);}
-  .gallery-nav button:disabled{opacity:.3;cursor:default;}
+  .gallery-nav button:disabled{opacity:.3;cursor:default;box-shadow:none;}
+  .gallery-nav button:disabled:hover{border-color:var(--line);}
   .gallery-nav button svg{width:18px;height:18px;}
 
   .gallery-carousel{
@@ -99,8 +119,10 @@
   .gallery-carousel::-webkit-scrollbar{display:none;}
   .g-slide{
     flex:0 0 auto;width:min(78vw,340px);scroll-snap-align:start;
-    background:var(--panel-2);border:1px solid var(--line);border-radius:10px;overflow:hidden;
+    background:var(--panel-2);border:1px solid var(--line);border-radius:var(--radius-md);overflow:hidden;
+    transition:border-color .2s,box-shadow .3s var(--ease-out),transform .3s var(--ease-out);
   }
+  .g-slide:hover{border-color:var(--line-strong);box-shadow:var(--shadow-md);transform:translateY(-4px);}
   .g-media{position:relative;aspect-ratio:4/3;overflow:hidden;background:#000;}
   .g-media.has-photo{cursor:zoom-in;}
   .g-media.has-photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease;}
@@ -125,15 +147,16 @@
   .lightbox{
     position:fixed;inset:0;z-index:200;background:rgba(11,12,14,.94);
     display:flex;align-items:center;justify-content:center;padding:40px 20px;
-    opacity:0;visibility:hidden;transition:opacity .2s ease,visibility .2s;
+    opacity:0;visibility:hidden;transition:opacity .25s var(--ease-out),visibility .25s;
   }
   .lightbox.is-open{opacity:1;visibility:visible;}
-  .lightbox img{max-width:min(900px,92vw);max-height:78vh;object-fit:contain;border-radius:4px;}
+  .lightbox img{max-width:min(900px,92vw);max-height:78vh;object-fit:contain;border-radius:var(--radius-sm);box-shadow:var(--shadow-md);}
   .lightbox-close{
     position:absolute;top:20px;right:20px;width:44px;height:44px;border-radius:50%;
     background:var(--panel-2);border:1px solid var(--line);color:var(--ink);
-    display:flex;align-items:center;justify-content:center;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;cursor:pointer;transition:border-color .2s,transform .15s;
   }
+  .lightbox-close:hover{border-color:var(--accent);}
   .lightbox-close svg{width:18px;height:18px;}
   .lightbox-caption{position:absolute;left:0;right:0;bottom:20px;text-align:center;color:var(--ink-dim);font-size:13px;padding:0 20px;}
 
@@ -141,8 +164,8 @@
   .promo{background:var(--bg);}
   .promo-video-wrap{
     max-width:380px;margin:0 auto;
-    border:1px solid var(--line);border-radius:8px;overflow:hidden;
-    background:#000;
+    border:1px solid var(--line);border-radius:var(--radius-md);overflow:hidden;
+    background:#000;box-shadow:var(--shadow-md);
   }
   .promo-video-wrap video{width:100%;height:auto;aspect-ratio:9/16;object-fit:cover;display:block;background:#000;}
   @media(max-width:480px){.promo-video-wrap{max-width:280px;}}
@@ -159,13 +182,14 @@
   .feat-block.rev{direction:rtl;}
   .feat-block.rev > *{direction:ltr;}
   .feat-block .fb-img{overflow:hidden;aspect-ratio:4/3;}
-  .feat-block .fb-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease;}
+  .feat-block .fb-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease-out);}
   .feat-block:hover .fb-img img{transform:scale(1.04);}
   .feat-block .fb-body{padding:56px 48px;}
   .feat-block .fb-tag{
     font-family:var(--cond);font-size:11px;text-transform:uppercase;letter-spacing:.15em;
-    color:var(--accent);margin-bottom:16px;display:block;
+    color:var(--accent);margin-bottom:16px;display:inline-flex;align-items:center;gap:8px;
   }
+  .feat-block .fb-tag svg{width:14px;height:14px;}
   .feat-block h3{font-size:clamp(20px,2.5vw,26px);}
   .feat-block .feat-list{list-style:none;margin:20px 0 0;padding:0;display:flex;flex-direction:column;gap:14px;}
   .feat-block .feat-list li{
@@ -186,7 +210,14 @@
   .specs{background:var(--panel);}
   .spec-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px;background:var(--line);}
   @media(max-width:720px){.spec-grid{grid-template-columns:1fr;}}
-  .spec-card{background:var(--bg);padding:40px;}
+  .spec-card{background:var(--bg);padding:44px 40px;transition:background .25s var(--ease-out),box-shadow .25s var(--ease-out);}
+  .spec-card:hover{background:var(--panel-3);box-shadow:inset 0 1px 0 var(--line);}
+  .spec-card .sc-icon{
+    width:44px;height:44px;border-radius:50%;flex-shrink:0;
+    background:rgba(95,184,255,.12);border:1px solid rgba(95,184,255,.3);
+    display:flex;align-items:center;justify-content:center;margin-bottom:18px;
+  }
+  .spec-card .sc-icon svg{width:20px;height:20px;color:var(--blue);}
   .spec-card .sc-tag{font-family:var(--cond);font-size:11px;text-transform:uppercase;letter-spacing:.14em;color:var(--blue);margin-bottom:16px;display:block;}
   .spec-card h3{font-size:21px;}
   .spec-card p{color:var(--ink-dim);font-size:14.5px;margin-top:14px;line-height:1.75;}
@@ -201,8 +232,14 @@
     .step{border-right:none;border-bottom:1px solid var(--line);padding:28px 0;}
     .step:last-child{border-bottom:none;}
   }
-  .step .snum{font-family:var(--cond);font-size:42px;color:var(--accent);}
-  .step h3{font-size:19px;margin-top:14px;}
+  .step .snum{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:52px;height:52px;border-radius:50%;
+    background:linear-gradient(135deg,rgba(255,107,26,.16),rgba(255,176,32,.08));
+    border:1px solid rgba(255,107,26,.35);
+    font-family:var(--cond);font-size:19px;color:var(--accent);font-weight:600;
+  }
+  .step h3{font-size:19px;margin-top:18px;}
   .step p{color:var(--ink-dim);margin-top:10px;font-size:15px;}
 
   /* ─── Experience cards (操船シミュレーター / カラーシミュレーター へ誘導) ─── */
@@ -211,10 +248,10 @@
   @media(max-width:820px){.exp-grid{grid-template-columns:1fr;}}
   .exp-card{
     background:var(--bg);padding:44px 40px;text-decoration:none;color:var(--ink);
-    display:flex;flex-direction:column;
-    transition:background .2s;
+    display:flex;flex-direction:column;position:relative;
+    transition:background .25s var(--ease-out),box-shadow .25s var(--ease-out);
   }
-  .exp-card:hover{background:var(--panel-2);}
+  .exp-card:hover{background:var(--panel-3);box-shadow:inset 0 2px 0 var(--accent);}
   .exp-card .exp-tag{font-family:var(--cond);font-size:11px;text-transform:uppercase;letter-spacing:.14em;color:var(--blue);margin-bottom:16px;}
   .exp-card h3{font-size:clamp(19px,2.4vw,23px);line-height:1.4;}
   .exp-card p{color:var(--ink-dim);font-size:14.5px;margin-top:12px;line-height:1.75;flex-grow:1;}
@@ -222,13 +259,14 @@
     margin-top:24px;font-family:var(--cond);font-size:13px;letter-spacing:.05em;text-transform:uppercase;
     color:var(--accent);display:inline-flex;align-items:center;gap:8px;
   }
-  .exp-card .exp-cta svg{width:14px;height:14px;transition:transform .2s;}
-  .exp-card:hover .exp-cta svg{transform:translateX(4px);}
+  .exp-card .exp-cta svg{width:14px;height:14px;transition:transform .25s var(--ease-out);}
+  .exp-card:hover .exp-cta svg{transform:translateX(5px);}
   .exp-thumb{
     display:block;align-self:flex-start;height:auto;max-width:100%;
-    border-radius:10px;border:1px solid var(--line);margin-bottom:22px;
-    background:var(--panel-2);
+    border-radius:var(--radius-md);border:1px solid var(--line);margin-bottom:22px;
+    background:var(--panel-2);transition:border-color .25s;
   }
+  .exp-card:hover .exp-thumb{border-color:var(--line-strong);}
   .exp-thumb.is-remote{width:200px;}
   .exp-thumb.is-color{width:340px;}
   @media(max-width:480px){
@@ -241,15 +279,17 @@
   .faq-list{border-top:1px solid var(--line);}
   .faq-item{border-bottom:1px solid var(--line);}
   .faq-item summary{
-    list-style:none;cursor:pointer;padding:24px 0;
+    list-style:none;cursor:pointer;padding:24px 16px;margin:0 -16px;border-radius:var(--radius-sm);
     display:flex;align-items:flex-start;gap:16px;
     font-size:16px;font-weight:700;
+    transition:background .2s var(--ease-out);
   }
+  .faq-item summary:hover{background:rgba(236,237,239,.035);}
   .faq-item summary::-webkit-details-marker{display:none;}
   .faq-item summary .q-mark{font-family:var(--cond);color:var(--accent);flex-shrink:0;}
-  .faq-item summary .icon{margin-left:auto;flex-shrink:0;color:var(--ink-dim);transition:transform .2s;}
-  .faq-item[open] summary .icon{transform:rotate(45deg);}
-  .faq-item .a-body{display:flex;gap:16px;padding:0 0 26px;}
+  .faq-item summary .icon{margin-left:auto;flex-shrink:0;color:var(--ink-dim);transition:transform .25s var(--ease-out);}
+  .faq-item[open] summary .icon{transform:rotate(45deg);color:var(--accent);}
+  .faq-item .a-body{display:flex;gap:16px;padding:0 16px 26px;}
   .faq-item .a-body .a-mark{font-family:var(--cond);color:var(--ink-dim);flex-shrink:0;}
   .faq-item .a-body p{margin:0;color:var(--ink-dim);font-size:14.5px;line-height:1.8;}
 
@@ -271,12 +311,15 @@
   @media(max-width:900px){.contact-grid{grid-template-columns:1fr;}}
   .field{margin-bottom:18px;}
   .field label{display:block;font-family:var(--mono);font-size:11px;color:var(--ink-dim);text-transform:uppercase;letter-spacing:.07em;margin-bottom:8px;}
+  .field label .req{color:var(--accent);margin-left:3px;}
   .field input,.field textarea{
     width:100%;background:var(--bg);border:1px solid var(--line);color:var(--ink);
-    padding:13px 14px;font-family:var(--display);font-size:14.5px;border-radius:2px;
+    padding:14px 16px;font-family:var(--display);font-size:15px;border-radius:var(--radius-sm);
+    min-height:48px;transition:border-color .2s,box-shadow .2s;
   }
-  .field textarea{min-height:120px;resize:vertical;}
-  .field input:focus,.field textarea:focus{outline:none;border-color:var(--blue);}
+  .field textarea{min-height:140px;resize:vertical;}
+  .field input:focus,.field textarea:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(95,184,255,.18);}
+  .form-note{font-size:12.5px;color:var(--ink-faint);margin:-4px 0 18px;}
   .contact-info .row{display:flex;gap:16px;padding:18px 0;border-top:1px solid var(--line);}
   .contact-info .row:first-child{border-top:none;}
   .contact-info .k{font-family:var(--mono);font-size:11px;color:var(--ink-dim);min-width:80px;text-transform:uppercase;letter-spacing:.06em;padding-top:3px;}
@@ -284,7 +327,8 @@
   /* ─── Spec Table (製品スペック / 諸元表) ─── */
   .spec-table{background:var(--bg);}
   .spec-table-grid{display:grid;grid-template-columns:repeat(2,1fr);column-gap:48px;border-top:1px solid var(--line);}
-  .spec-table-item{padding:20px 0;border-bottom:1px solid var(--line);}
+  .spec-table-item{padding:20px 12px;margin:0 -12px;border-bottom:1px solid var(--line);border-radius:var(--radius-sm);transition:background .2s;}
+  .spec-table-item:hover{background:rgba(236,237,239,.03);}
   .spec-table-item .k{font-family:var(--mono);font-size:11px;color:var(--ink-dim);text-transform:uppercase;letter-spacing:.06em;}
   .spec-table-item .v{font-size:15px;color:var(--ink);margin-top:8px;line-height:1.6;}
   .spec-table-item .v .note{display:block;color:var(--ink-dim);font-size:12px;margin-top:5px;line-height:1.6;}
@@ -295,10 +339,10 @@
   .comparison{background:var(--panel);}
   .comparison-note{
     font-size:13.5px;color:var(--ink-dim);background:var(--panel-2);
-    border:1px solid var(--line);border-radius:6px;padding:18px 20px;margin-bottom:36px;line-height:1.85;
+    border:1px solid var(--line);border-radius:var(--radius-md);padding:18px 20px;margin-bottom:36px;line-height:1.85;
   }
   .comparison-note strong{color:var(--ink);}
-  .comparison-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  .comparison-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:var(--radius-md);}
   table.comparison-table{width:100%;border-collapse:collapse;min-width:600px;}
   table.comparison-table th,table.comparison-table td{
     text-align:left;padding:16px 18px;border-bottom:1px solid var(--line);font-size:14px;vertical-align:top;
@@ -307,6 +351,8 @@
     font-family:var(--cond);font-size:11.5px;text-transform:uppercase;letter-spacing:.06em;
     color:var(--ink-dim);white-space:nowrap;
   }
+  table.comparison-table tbody tr{transition:background .2s;}
+  table.comparison-table tbody tr:hover{background:rgba(236,237,239,.03);}
   table.comparison-table tbody th{font-weight:700;color:var(--ink);white-space:nowrap;padding-left:0;}
   table.comparison-table td{color:var(--ink-dim);}
   table.comparison-table td .todo-flag{
@@ -317,6 +363,8 @@
 </style>
 </head>
 <body id="top">
+
+<a class="skip-link" href="#product">本文へスキップ</a>
 
 <!-- ============================================================
      会社情報は company-info.js に集約しています。
@@ -352,9 +400,10 @@
 </header>
 
 <!-- ─── Hero ─── -->
-<section class="hero" id="product">
+<section class="hero" id="product" tabindex="-1">
   <div class="hero-bg"></div>
   <div class="hero-scrim"></div>
+  <div class="hero-glow" aria-hidden="true"></div>
   <div class="hero-content">
     <div class="wrap">
       <div class="eyebrow">農薬散布ボート / AGRICULTURAL SPRAY BOAT</div>
@@ -370,10 +419,34 @@
   <div id="ctaBarShow" aria-hidden="true"></div>
   <div class="ticker">
     <div class="wrap">
-      <div class="item"><div class="k">Hull</div><div class="v">軽量ウレタンフォーム</div></div>
-      <div class="item"><div class="k">Propeller</div><div class="v">13インチ大型プロペラ</div></div>
-      <div class="item"><div class="k">Battery</div><div class="v">18V 6Ah / 約1.5ha散布</div></div>
-      <div class="item"><div class="k">Pump</div><div class="v">500ml〜5.6L/分 可変</div></div>
+      <div class="item">
+        <div class="k-row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17c1.5 1 3 1 4.5 0s3-1 4.5 0 3 1 4.5 0 3-1 4.5 0"/><path d="M5 17V9a7 7 0 0 1 14 0v8"/></svg>
+          <span class="k">Hull</span>
+        </div>
+        <div class="v">軽量ウレタンフォーム</div>
+      </div>
+      <div class="item">
+        <div class="k-row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="2.5"/><path d="M12 9.5C10 6 6 6 5 8s1 5.5 5 6M14.5 12c3.5 2 3.5 6 1.5 7s-5.5-1-6-5M9.5 12c-3.5-2-3.5-6-1.5-7s5.5 1 6 5"/></svg>
+          <span class="k">Propeller</span>
+        </div>
+        <div class="v">13インチ大型プロペラ</div>
+      </div>
+      <div class="item">
+        <div class="k-row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="16" height="11" rx="1.5"/><path d="M19 10v5" stroke-width="2.5"/><path d="M8 11v3M12 11v3" /></svg>
+          <span class="k">Battery</span>
+        </div>
+        <div class="v">18V 6Ah / 約1.5ha散布</div>
+      </div>
+      <div class="item">
+        <div class="k-row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c3 4 6 7.5 6 11a6 6 0 0 1-12 0c0-3.5 3-7 6-11z"/></svg>
+          <span class="k">Pump</span>
+        </div>
+        <div class="v">500ml〜5.6L/分 可変</div>
+      </div>
     </div>
   </div>
 </section>
@@ -386,7 +459,7 @@
       <h2>実際の走行を、<br>動画で見る。</h2>
     </div>
     <div class="promo-video-wrap reveal">
-      <video controls playsinline preload="metadata" width="720" height="1280" poster="img11.jpg" src="プロモーションビデオ.mp4"></video>
+      <video controls playsinline preload="metadata" width="720" height="1280" poster="img11.jpg" src="promo-video.mp4"></video>
     </div>
   </div>
 </section>
@@ -496,10 +569,13 @@
     <!-- 船体 -->
     <div class="feat-block reveal">
       <div class="fb-img">
-        <img src="img01.jpg" alt="ウレタン船体">
+        <img src="img01.jpg" alt="ウレタン船体" loading="lazy">
       </div>
       <div class="fb-body">
-        <span class="fb-tag">Hull / 船体</span>
+        <span class="fb-tag">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17c1.5 1 3 1 4.5 0s3-1 4.5 0 3 1 4.5 0 3-1 4.5 0"/><path d="M5 17V9a7 7 0 0 1 14 0v8"/></svg>
+          Hull / 船体
+        </span>
         <h3>旋回性と安定性を<br>両立させた軽量船体。</h3>
         <ul class="feat-list">
           <li>耐久性のある軽量ウレタンフォームを使用し、独自の加工技術により優れた旋回性と安定した走行性を実現。</li>
@@ -512,10 +588,13 @@
     <!-- 動力部 -->
     <div class="feat-block rev reveal">
       <div class="fb-img">
-        <img src="img06.jpg" alt="電動モーター・プロペラ">
+        <img src="img06.jpg" alt="電動モーター・プロペラ" loading="lazy">
       </div>
       <div class="fb-body">
-        <span class="fb-tag">Powertrain / 動力部</span>
+        <span class="fb-tag">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg>
+          Powertrain / 動力部
+        </span>
         <h3>トルクフルな発進と<br>クリーンな電動推進。</h3>
         <ul class="feat-list">
           <li>ハイパワーな電動モーターと13インチの大型プロペラにより、トルクフルな発進と安定した高速走行を実現。</li>
@@ -538,11 +617,17 @@
     </div>
     <div class="spec-grid reveal">
       <div class="spec-card">
+        <div class="sc-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c3 4 6 7.5 6 11a6 6 0 0 1-12 0c0-3.5 3-7 6-11z"/></svg>
+        </div>
         <span class="sc-tag">Pump / ポンプ</span>
         <h3>精密に、確実に。<br>高性能ダイヤフラムポンプ。</h3>
         <p>耐久性・耐薬品性に優れたサントプレン製ダイヤフラムを採用した高性能ポンプを搭載。吐出量は500ml/分〜5.6L/分までダイヤルで無段階に調整可能。同一吐出量でのON/OFFはもちろん、スロットルと連動した吐出切り替えにも対応し、圃場の状況に合わせた柔軟な散布を実現します。</p>
       </div>
       <div class="spec-card">
+        <div class="sc-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>
+        </div>
         <span class="sc-tag">Gyro / 操縦性</span>
         <h3>ジャイロ内蔵で、<br>直進性とターンが安定。</h3>
         <p>ジャイロセンサーを内蔵することで、風や水流の影響を受けにくい安定した直進走行を実現。ターン時も姿勢を素早く修正し、意図した軌跡で散布エリアをカバーできます。リモコン操作に不慣れな方でも扱いやすい制御性を提供します。</p>
@@ -825,21 +910,22 @@
     <div class="contact-grid">
       <form class="reveal" action="mailto:contact@example.com" method="post" enctype="text/plain">
         <div class="field">
-          <label for="name">お名前</label>
-          <input id="name" name="name" type="text" required>
+          <label for="name">お名前<span class="req" aria-hidden="true">*</span></label>
+          <input id="name" name="name" type="text" autocomplete="name" required>
         </div>
         <div class="field">
           <label for="org">会社・法人名</label>
-          <input id="org" name="org" type="text">
+          <input id="org" name="org" type="text" autocomplete="organization">
         </div>
         <div class="field">
-          <label for="email">メールアドレス</label>
-          <input id="email" name="email" type="email" required>
+          <label for="email">メールアドレス<span class="req" aria-hidden="true">*</span></label>
+          <input id="email" name="email" type="email" autocomplete="email" required>
         </div>
         <div class="field">
-          <label for="message">お問い合わせ内容</label>
+          <label for="message">お問い合わせ内容<span class="req" aria-hidden="true">*</span></label>
           <textarea id="message" name="message" required></textarea>
         </div>
+        <p class="form-note"><span class="req" aria-hidden="true">*</span> は必須項目です</p>
         <button type="submit" class="btn btn-primary" style="border:none;cursor:pointer;">送信する</button>
       </form>
       <div class="contact-info reveal">
