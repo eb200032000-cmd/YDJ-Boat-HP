@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>動画ギャラリー ｜ YOSHIDA KAKO 農薬散布ボート JFF-01</title>
+<meta name="description" content="吉田化工株式会社の電動農薬散布ボート「JFF-01」の動画ギャラリー。走行シーン・こだわりの船体・各機能の紹介動画をまとめてご覧いただけます。">
+<!-- ドメインが確定したら、下記 og:url / og:image / canonical の URL を実際の公開ドメインに差し替えてください -->
+<link rel="canonical" href="https://www.yoshida-kako.co.jp/videos.html">
+
+<!-- ─── OGP / SNSシェア用 ─── -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="YOSHIDA KAKO（吉田化工株式会社）">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="動画ギャラリー ｜ YOSHIDA KAKO">
+<meta property="og:description" content="電動農薬散布ボート「JFF-01」の走行シーン・こだわりの船体・各機能の紹介動画をまとめてご覧いただけます。">
+<meta property="og:url" content="https://www.yoshida-kako.co.jp/videos.html">
+<meta property="og:image" content="https://www.yoshida-kako.co.jp/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="YOSHIDA KAKO 電動農薬散布ボート JFF-01">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="動画ギャラリー ｜ YOSHIDA KAKO">
+<meta name="twitter:description" content="電動農薬散布ボート「JFF-01」の走行シーン・こだわりの船体・各機能の紹介動画をまとめてご覧いただけます。">
+<meta name="twitter:image" content="https://www.yoshida-kako.co.jp/og-image.jpg">
+
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<meta name="theme-color" content="#0B0C0E">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="YOSHIDA KAKO">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700;900&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="common.css">
+<style>
+  /* ─── Video hero (プロモーション / こだわり紹介など、1本を大きく見せる) ─── */
+  .video-hero-section{padding-bottom:80px;}
+  .video-hero-wrap{
+    max-width:340px;margin:0 auto;
+    border:1px solid var(--line);border-radius:var(--radius-md);overflow:hidden;
+    background:#000;box-shadow:var(--shadow-md);
+  }
+  .video-hero-wrap .video-thumb{aspect-ratio:9/16;}
+  .video-hero-cap{margin:18px auto 0;max-width:480px;text-align:center;color:var(--ink-dim);font-size:14px;line-height:1.7;}
+  @media(max-width:480px){.video-hero-wrap{max-width:280px;}}
+
+  /* ─── Video grid (機能紹介・試してみた 等) ─── */
+  .video-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:20px;}
+  .video-card{
+    background:var(--panel-2);border:1px solid var(--line);border-radius:var(--radius-md);overflow:hidden;
+    transition:border-color .2s,box-shadow .3s var(--ease-out),transform .3s var(--ease-out);
+  }
+  .video-card:hover{border-color:var(--line-strong);box-shadow:var(--shadow-md);transform:translateY(-4px);}
+  .vc-caption{padding:14px 16px 18px;}
+  .vc-tag{font-family:var(--cond);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);}
+  .vc-tag.is-pending{color:var(--ink-dim);}
+  .vc-caption p{margin:6px 0 0;font-size:13px;color:var(--ink-dim);line-height:1.65;}
+
+  .video-card.is-pending{opacity:.72;}
+  .video-placeholder{
+    aspect-ratio:9/16;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;
+    background:repeating-linear-gradient(135deg,rgba(236,237,239,.04) 0 10px,transparent 10px 20px);
+    color:var(--ink-dim);border-bottom:1px dashed var(--line);
+  }
+  .video-placeholder svg{width:26px;height:26px;opacity:.55;}
+  .video-placeholder span{font-family:var(--cond);font-size:11px;letter-spacing:.08em;text-transform:uppercase;}
+
+  /* ─── YouTube導線(仮対応): 動画ファイルが重くGitHubに置けないため、
+       「YouTubeで見る」導線のみ用意。サムネイルは自前で用意せず、
+       各 .video-thumb の data-youtube-url に実際のURLを入れると
+       YouTube側のサムネイル画像を自動取得して表示する
+       (末尾のスクリプトで処理)。 ─── */
+  .video-thumb{position:relative;display:block;width:100%;aspect-ratio:9/16;overflow:hidden;background:#0B0C0E;}
+  .video-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
+  .video-thumb .yt-badge{
+    position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;
+    background:linear-gradient(180deg,rgba(0,0,0,.10) 0%,rgba(0,0,0,.65) 100%);color:#fff;text-align:center;padding:16px;
+  }
+  .video-thumb .yt-badge svg{width:44px;height:44px;transition:transform .2s var(--ease-out);}
+  .video-thumb .yt-badge .yt-label{font-family:var(--cond);font-size:11px;letter-spacing:.08em;text-transform:uppercase;}
+  .video-thumb.is-pending .yt-badge .yt-label{color:rgba(255,255,255,.82);}
+  .video-thumb.is-ready{cursor:pointer;}
+  .video-thumb.is-ready .yt-badge{background:linear-gradient(180deg,rgba(0,0,0,0) 40%,rgba(0,0,0,.6) 100%);}
+  .video-thumb.is-ready:hover .yt-badge svg,.video-thumb.is-ready:focus-visible .yt-badge svg{transform:scale(1.08);}
+  .video-thumb.is-ready:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
+
+  .video-section:nth-of-type(even){background:var(--panel);}
+</style>
+</head>
+<body id="top" data-page="videos">
+
+<!-- ============================================================
+     【重要・仮対応について】
+     動画ファイル(mp4)はサイズが大きくGitHubに置けないため、
+     現在このページでは動画を直接埋め込まず、
+     「YouTubeで公開予定」の仮表示にしています。
+
+     YouTubeへのアップロードが完了したら、下記の各カードにある
+       <div class="video-thumb is-pending" data-youtube-url="">
+     の data-youtube-url="" の中に動画のURLを貼り付けてください
+     (公開設定は「限定公開」推奨。「非公開」だとリンクを知っていても
+     訪問者は再生できません)。
+     例: data-youtube-url="https://www.youtube.com/watch?v=XXXXXXXXXXX"
+
+     URLを入れるだけで、ページを開いたときに自動で
+     ・YouTube側のサムネイル画像を取得して表示
+     ・「YouTubeで見る」のクリック可能なリンクに切り替え
+     が行われます(仕組みは本ファイル末尾の <script> で処理)。
+     サムネイル画像をこちらで別途用意する必要はありません
+     (YouTube Studioで設定したサムネイルがそのまま使われます)。
+     クラス名や構造は変えずに、data-youtube-url の中身だけ
+     書き換えればOKです。
+     ============================================================ -->
+
+<a class="skip-link" href="#main-content">本文へスキップ</a>
+
+<!-- ─── Header ─── -->
+<header>
+  <div class="wrap">
+    <a class="logo" href="index.html">YOSHIDA KAKO<span>KK</span></a>
+    <button class="nav-toggle" id="navToggle" type="button" aria-label="メニューを開く" aria-expanded="false" aria-controls="siteNav">
+      <span></span><span></span><span></span>
+    </button>
+    <nav id="siteNav">
+      <ul>
+        <li><a href="index.html#product" data-nav="product">製品概要</a></li>
+        <li><a href="index.html#promo" data-nav="promo">動画</a></li>
+        <li><a href="index.html#gallery" data-nav="gallery">ギャラリー</a></li>
+        <li><a href="index.html#features" data-nav="features">特徴</a></li>
+        <li><a href="index.html#howto" data-nav="howto">使い方</a></li>
+        <li><a href="index.html#specs" data-nav="specs">スペック</a></li>
+        <li><a href="index.html#faq" data-nav="faq">よくある質問</a></li>
+        <li class="nav-sep" aria-hidden="true"></li>
+        <li><a href="simulator.html" data-nav="simulator">操船シミュレーター</a></li>
+        <li><a href="color.html" data-nav="color">カラーシミュレーター</a></li>
+        <li><a href="videos.html" data-nav="videos">動画ギャラリー</a></li>
+        <li><a href="index.html#contact" data-nav="contact">お問い合わせ</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- ─── Page banner ─── -->
+<section class="page-banner" id="main-content" tabindex="-1">
+  <div class="wrap">
+    <a class="back-link" href="index.html">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      トップへ戻る
+    </a>
+    <div class="eyebrow">VIDEO GALLERY</div>
+    <h1>動画ギャラリー</h1>
+    <p class="lead">JFF-01の走行シーンや、船体・各機能のこだわりを動画でご紹介します。今後はInstagramやTikTokなどのSNSでも順次発信していく予定です。</p>
+  </div>
+  <!-- モバイル固定CTAバー: このマーカーが画面外(上)に出たらバーを表示する -->
+  <div id="ctaBarShow" aria-hidden="true"></div>
+</section>
+
+<!-- ─── プロモーション動画 ─── -->
+<section class="video-section video-hero-section">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">PROMOTION</div>
+      <h2>プロモーション動画</h2>
+      <p>JFF-01の各部をクローズアップで紹介するプロモーション動画です。</p>
+    </div>
+    <div class="video-hero-wrap reveal">
+      <div class="video-thumb is-pending" data-youtube-url="">
+        <div class="yt-badge">
+          <svg viewBox="0 0 68 48" aria-hidden="true"><path d="M66.5 7.5c-.8-3-3-5.2-6-6C55 0 34 0 34 0S13 0 7.5 1.5c-3 .8-5.2 3-6 6C0 13 0 24 0 24s0 11 1.5 16.5c.8 3 3 5.2 6 6C13 48 34 48 34 48s21 0 26.5-1.5c3-.8 5.2-3 6-6C68 35 68 24 68 24s0-11-1.5-16.5z" fill="#FF0000"/><path d="M45 24 27 14v20z" fill="#fff"/></svg>
+          <span class="yt-label">YouTubeで公開予定</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── こだわり紹介 ─── -->
+<section class="video-section video-hero-section">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">COMMITMENT</div>
+      <h2>こだわり紹介</h2>
+      <p>実際の走行シーンとともに、この船体のこだわりをご紹介します。</p>
+    </div>
+    <div class="video-hero-wrap reveal">
+      <div class="video-thumb is-pending" data-youtube-url="">
+        <div class="yt-badge">
+          <svg viewBox="0 0 68 48" aria-hidden="true"><path d="M66.5 7.5c-.8-3-3-5.2-6-6C55 0 34 0 34 0S13 0 7.5 1.5c-3 .8-5.2 3-6 6C0 13 0 24 0 24s0 11 1.5 16.5c.8 3 3 5.2 6 6C13 48 34 48 34 48s21 0 26.5-1.5c3-.8 5.2-3 6-6C68 35 68 24 68 24s0-11-1.5-16.5z" fill="#FF0000"/><path d="M45 24 27 14v20z" fill="#fff"/></svg>
+          <span class="yt-label">YouTubeで公開予定</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── この船体、実は。。。(機能紹介) ─── -->
+<section class="video-section" id="hull-secrets">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">THIS HULL, ACTUALLY...</div>
+      <h2>この船体、実は。。。</h2>
+      <p>ウレタン船体・オートクルーズ・ジャイロ・トリガーロック・ガードフレームなど、JFF-01ならではの工夫を短い動画でご紹介します。</p>
+    </div>
+    <div class="video-grid reveal">
+
+      <div class="video-card">
+        <div class="video-thumb is-pending" data-youtube-url="">
+          <div class="yt-badge">
+            <svg viewBox="0 0 68 48" aria-hidden="true"><path d="M66.5 7.5c-.8-3-3-5.2-6-6C55 0 34 0 34 0S13 0 7.5 1.5c-3 .8-5.2 3-6 6C0 13 0 24 0 24s0 11 1.5 16.5c.8 3 3 5.2 6 6C13 48 34 48 34 48s21 0 26.5-1.5c3-.8 5.2-3 6-6C68 35 68 24 68 24s0-11-1.5-16.5z" fill="#FF0000"/><path d="M45 24 27 14v20z" fill="#fff"/></svg>
+            <span class="yt-label">YouTubeで公開予定</span>
+          </div>
+        </div>
+        <div class="vc-caption">
+          <span class="vc-tag">ウレタン船体</span>
+          <p>耐久性のある軽量ウレタンフォームを使用した船体のクローズアップです。</p>
+        </div>
+      </div>
+
+      <div class="video-card">
+        <div class="video-thumb is-pending" data-youtube-url="">
+          <div class="yt-badge">
+            <svg viewBox="0 0 68 48" aria-hidden="true"><path d="M66.5 7.5c-.8-3-3-5.2-6-6C55 0 34 0 34 0S13 0 7.5 1.5c-3 .8-5.2 3-6 6C0 13 0 24 0 24s0 11 1.5 16.5c.8 3 3 5.2 6 6C13 48 34 48 34 48s21 0 26.5-1.5c3-.8 5.2-3 6-6C68 35 68 24 68 24s0-11-1.5-16.5z" fill="#FF0000"/><path d="M45 24 27 14v20z" fill="#fff"/></svg>
+            <span class="yt-label">YouTubeで公開予定</span>
+          </div>
+        </div>
+        <div class="vc-caption">
+          <span class="vc-tag">オートクルーズ</span>
+          <p>一定の方向へ自動で走行するオートクルーズ機能のデモンストレーションです。</p>
+        </div>
+      </div>
+
+      <div class="video-card">
+        <div class="video-thumb is-pending" data-youtube-url="">
+          <div class="yt-badge">
+            <svg viewBox="0 0 68 48" aria-hidden="true"><path d="M66.5 7.5c-.8-3-3-5.2-6-6C55 0 34 0 34 0S13 0 7.5 1.5c-3 .8-5.2 3-6 6C0 13 0 24 0 24s0 11 1.5 16.5c.8 3 3 5.2 6 6C13 48 34 48 34 48s21 0 26.5-1.5c3-.8 5.2-3 6-6C68 35 68 24 68 24s0-11-1.5-16.5z" fill="#FF0000"/><path d="M45 24 27 14v20z" fill="#fff"/></svg>
+            <span class="yt-label">YouTubeで公開予定</span>
+          </div>
+        </div>
+        <div class="vc-caption">
+          <span class="vc-tag">ジャイロ</span>
+          <p>ジャイロセンサーにより、風や水流の影響を受けにくい安定した直進走行を実現します。</p>
+        </div>
+      </div>
+
+      <div class="video-card">
+        <div class="video-thumb is-pending" data-youtube-url="">
+          <div class="yt-badge">
+            <svg viewBox="0 0 68 48" aria-hidden="true"><path d="M66.5 7.5c-.8-3-3-5.2-6-6C55 0 34 0 34 0S13 0 7.5 1.5c-3 .8-5.2 3-6 6C0 13 0 24 0 24s0 11 1.5 16.5c.8 3 3 5.2 6 6C13 48 34 48 34 48s21 0 26.5-1.5c3-.8 5.2-3 6-6C68 35 68 24 68 24s0-11-1.5-16.5z" fill="#FF0000"/><path d="M45 24 27 14v20z" fill="#fff"/></svg>
+            <span class="yt-label">YouTubeで公開予定</span>
+          </div>
+        </div>
+        <div class="vc-caption">
+          <span class="vc-tag">トリガーロック</span>
+          <p>トリガーを引き続けなくても走行を維持できる、トリガーロック機能のご紹介です。</p>
+        </div>
+      </div>
+
+      <div class="video-card">
+        <div class="video-thumb is-pending" data-youtube-url="">
+          <div class="yt-badge">
+            <svg viewBox="0 0 68 48" aria-hidden="true"><path d="M66.5 7.5c-.8-3-3-5.2-6-6C55 0 34 0 34 0S13 0 7.5 1.5c-3 .8-5.2 3-6 6C0 13 0 24 0 24s0 11 1.5 16.5c.8 3 3 5.2 6 6C13 48 34 48 34 48s21 0 26.5-1.5c3-.8 5.2-3 6-6C68 35 68 24 68 24s0-11-1.5-16.5z" fill="#FF0000"/><path d="M45 24 27 14v20z" fill="#fff"/></svg>
+            <span class="yt-label">YouTubeで公開予定</span>
+          </div>
+        </div>
+        <div class="vc-caption">
+          <span class="vc-tag">ガードフレーム</span>
+          <p>プロペラ・駆動部を守るガードフレーム（柵）の様子です。</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── 試してみた ─── -->
+<section class="video-section" id="tried-it">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">TRIED IT</div>
+      <h2>試してみた</h2>
+      <p>スピードや出力の違いを、実際の水田で走らせて検証した動画です。</p>
+    </div>
+    <div class="video-grid reveal">
+
+      <div class="video-card">
+        <div class="video-thumb is-pending" data-youtube-url="">
+          <div class="yt-badge">
+            <svg viewBox="0 0 68 48" aria-hidden="true"><path d="M66.5 7.5c-.8-3-3-5.2-6-6C55 0 34 0 34 0S13 0 7.5 1.5c-3 .8-5.2 3-6 6C0 13 0 24 0 24s0 11 1.5 16.5c.8 3 3 5.2 6 6C13 48 34 48 34 48s21 0 26.5-1.5c3-.8 5.2-3 6-6C68 35 68 24 68 24s0-11-1.5-16.5z" fill="#FF0000"/><path d="M45 24 27 14v20z" fill="#fff"/></svg>
+            <span class="yt-label">YouTubeで公開予定</span>
+          </div>
+        </div>
+        <div class="vc-caption">
+          <span class="vc-tag">スピード測定</span>
+          <p>実際の走行スピードを測定してみた検証動画です。</p>
+        </div>
+      </div>
+
+      <div class="video-card">
+        <div class="video-thumb is-pending" data-youtube-url="">
+          <div class="yt-badge">
+            <svg viewBox="0 0 68 48" aria-hidden="true"><path d="M66.5 7.5c-.8-3-3-5.2-6-6C55 0 34 0 34 0S13 0 7.5 1.5c-3 .8-5.2 3-6 6C0 13 0 24 0 24s0 11 1.5 16.5c.8 3 3 5.2 6 6C13 48 34 48 34 48s21 0 26.5-1.5c3-.8 5.2-3 6-6C68 35 68 24 68 24s0-11-1.5-16.5z" fill="#FF0000"/><path d="M45 24 27 14v20z" fill="#fff"/></svg>
+            <span class="yt-label">YouTubeで公開予定</span>
+          </div>
+        </div>
+        <div class="vc-caption">
+          <span class="vc-tag">出力100%</span>
+          <p>出力100%でどれだけ走れるかを試した検証動画です。</p>
+        </div>
+      </div>
+
+      <div class="video-card">
+        <div class="video-thumb is-pending" data-youtube-url="">
+          <div class="yt-badge">
+            <svg viewBox="0 0 68 48" aria-hidden="true"><path d="M66.5 7.5c-.8-3-3-5.2-6-6C55 0 34 0 34 0S13 0 7.5 1.5c-3 .8-5.2 3-6 6C0 13 0 24 0 24s0 11 1.5 16.5c.8 3 3 5.2 6 6C13 48 34 48 34 48s21 0 26.5-1.5c3-.8 5.2-3 6-6C68 35 68 24 68 24s0-11-1.5-16.5z" fill="#FF0000"/><path d="M45 24 27 14v20z" fill="#fff"/></svg>
+            <span class="yt-label">YouTubeで公開予定</span>
+          </div>
+        </div>
+        <div class="vc-caption">
+          <span class="vc-tag">出力80%</span>
+          <p>出力80%でどれだけ走れるかを試した検証動画です。バッテリー残量が少なくなるとプロポのアラームが鳴ります。</p>
+        </div>
+      </div>
+
+      <!-- TODO: プロポ説明動画(プロポ説明動画.mp4, 約29.7MB)を追加。
+           ファイルサイズの都合でまだアップロードできていないため、
+           一旦「準備中」のプレースホルダーにしています。
+           動画を軽量化するか、videos/remote-control.mp4 として配置後、
+           下記コメントを外して <video> に差し替えてください。
+      <div class="video-card">
+        <video controls playsinline preload="metadata" poster="videos/remote-control.jpg" src="videos/remote-control.mp4"></video>
+        <div class="vc-caption">
+          <span class="vc-tag">プロポ操作説明</span>
+          <p>リモコン(プロポ)の操作方法を説明する動画です。</p>
+        </div>
+      </div>
+      -->
+      <div class="video-card is-pending">
+        <div class="video-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="15" height="14" rx="2"/><path d="M21 8l-3 2.5L21 13V8z"/></svg>
+          <span>準備中</span>
+        </div>
+        <div class="vc-caption">
+          <span class="vc-tag is-pending">プロポ操作説明</span>
+          <p>リモコン(プロポ)の操作方法を説明する動画です。近日公開予定です。</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div id="ctaBarHide" aria-hidden="true"></div>
+  <div class="wrap">
+    <a class="f-logo" href="index.html">吉田化工<span>株式会社</span></a>
+    <div class="f-links">
+      <a href="index.html">トップへ戻る</a>
+      <a href="simulator.html">操船シミュレーター</a>
+      <a href="color.html">カラーシミュレーター</a>
+      <a href="company.html">会社概要</a>
+      <a href="index.html#contact">お問い合わせ</a>
+    </div>
+    <div class="copy">&copy; 2026 YOSHIDA KAKO. All rights reserved.</div>
+  </div>
+</footer>
+
+<div class="mobile-cta-bar" id="mobileCtaBar">
+  <a href="index.html#contact" class="btn btn-primary">お問い合わせはこちら</a>
+</div>
+
+<a href="#top" class="back-to-top" id="backToTop" aria-label="トップへ戻る">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</a>
+
+<script src="common.js"></script>
+<script>
+  // ─── YouTube導線(仮対応) ───
+  // data-youtube-url にURLが入っているカードだけ、自動で
+  // (1) YouTube側のサムネイル画像を取得して表示 (2) クリック可能な
+  // 「YouTubeで見る」リンクに切り替える。URLが空のままなら
+  // 「YouTubeで公開予定」の表示のまま(クリックしても何も起きない)。
+  (function () {
+    function extractYouTubeId(url) {
+      var m = url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|shorts\/|embed\/|live\/))([\w-]{11})/);
+      return m ? m[1] : null;
+    }
+
+    document.querySelectorAll('.video-thumb[data-youtube-url]').forEach(function (thumb) {
+      var url = (thumb.getAttribute('data-youtube-url') || '').trim();
+      if (!url) return;
+      thumb.classList.remove('is-pending');
+      thumb.classList.add('is-ready');
+
+      var label = thumb.querySelector('.yt-label');
+      if (label) label.textContent = 'YouTubeで見る';
+
+      // YouTube側のサムネイル画像を自動取得(自前の画像は用意不要)
+      var videoId = extractYouTubeId(url);
+      if (videoId) {
+        var img = document.createElement('img');
+        img.alt = '';
+        img.loading = 'lazy';
+        img.src = 'https://img.youtube.com/vi/' + videoId + '/maxresdefault.jpg';
+        img.onerror = function () {
+          img.onerror = null;
+          img.src = 'https://img.youtube.com/vi/' + videoId + '/hqdefault.jpg';
+        };
+        thumb.insertBefore(img, thumb.firstChild);
+      }
+
+      thumb.setAttribute('role', 'link');
+      thumb.setAttribute('tabindex', '0');
+      thumb.setAttribute('aria-label', 'YouTubeで再生');
+      function openIt() { window.open(url, '_blank', 'noopener'); }
+      thumb.addEventListener('click', openIt);
+      thumb.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openIt(); }
+      });
+    });
+  })();
+</script>
+</body>
+</html>
