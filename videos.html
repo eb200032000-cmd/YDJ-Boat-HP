@@ -63,15 +63,6 @@
   .vc-tag.is-pending{color:var(--ink-dim);}
   .vc-caption p{margin:6px 0 0;font-size:13px;color:var(--ink-dim);line-height:1.65;}
 
-  .video-card.is-pending{opacity:.72;}
-  .video-placeholder{
-    aspect-ratio:9/16;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;
-    background:repeating-linear-gradient(135deg,rgba(236,237,239,.04) 0 10px,transparent 10px 20px);
-    color:var(--ink-dim);border-bottom:1px dashed var(--line);
-  }
-  .video-placeholder svg{width:26px;height:26px;opacity:.55;}
-  .video-placeholder span{font-family:var(--cond);font-size:11px;letter-spacing:.08em;text-transform:uppercase;}
-
   /* ─── YouTube導線(仮対応): 動画ファイルが重くGitHubに置けないため、
        「YouTubeで見る」導線のみ用意。サムネイルは自前で用意せず、
        各 .video-thumb の data-youtube-url に実際のURLを入れると
@@ -162,21 +153,55 @@
   <div id="ctaBarShow" aria-hidden="true"></div>
 </section>
 
-<!-- ─── プロモーション動画 ─── -->
-<section class="video-section video-hero-section">
+<!-- ─── プロモーション動画(2本) ─── -->
+<section class="video-section">
   <div class="wrap">
     <div class="section-head reveal">
       <div class="eyebrow">PROMOTION</div>
       <h2>プロモーション動画</h2>
-      <p>JFF-01の各部をクローズアップで紹介するプロモーション動画です。</p>
+      <p>JFF-01の魅力を紹介するプロモーション動画です。</p>
     </div>
-    <div class="video-hero-wrap reveal">
-      <div class="video-thumb is-pending" data-youtube-url="">
-        <div class="yt-badge">
-          <svg viewBox="0 0 68 48" aria-hidden="true"><path d="M66.5 7.5c-.8-3-3-5.2-6-6C55 0 34 0 34 0S13 0 7.5 1.5c-3 .8-5.2 3-6 6C0 13 0 24 0 24s0 11 1.5 16.5c.8 3 3 5.2 6 6C13 48 34 48 34 48s21 0 26.5-1.5c3-.8 5.2-3 6-6C68 35 68 24 68 24s0-11-1.5-16.5z" fill="#FF0000"/><path d="M45 24 27 14v20z" fill="#fff"/></svg>
-          <span class="yt-label">YouTubeで公開予定</span>
+    <div class="video-grid reveal">
+
+      <div class="video-card">
+        <div class="video-thumb is-pending" data-youtube-url="https://youtube.com/shorts/Js_ATJUhaYo?feature=share">
+          <div class="yt-badge">
+            <svg viewBox="0 0 68 48" aria-hidden="true"><path d="M66.5 7.5c-.8-3-3-5.2-6-6C55 0 34 0 34 0S13 0 7.5 1.5c-3 .8-5.2 3-6 6C0 13 0 24 0 24s0 11 1.5 16.5c.8 3 3 5.2 6 6C13 48 34 48 34 48s21 0 26.5-1.5c3-.8 5.2-3 6-6C68 35 68 24 68 24s0-11-1.5-16.5z" fill="#FF0000"/><path d="M45 24 27 14v20z" fill="#fff"/></svg>
+            <span class="yt-label">YouTubeで公開予定</span>
+          </div>
+        </div>
+        <div class="vc-caption">
+          <span class="vc-tag">プロモーションビデオ1</span>
+          <p>JFF-01の魅力をご紹介するプロモーション動画です。</p>
         </div>
       </div>
+
+      <div class="video-card">
+        <div class="video-thumb is-pending" data-youtube-url="https://youtube.com/shorts/1erOORNbgeM?feature=share">
+          <div class="yt-badge">
+            <svg viewBox="0 0 68 48" aria-hidden="true"><path d="M66.5 7.5c-.8-3-3-5.2-6-6C55 0 34 0 34 0S13 0 7.5 1.5c-3 .8-5.2 3-6 6C0 13 0 24 0 24s0 11 1.5 16.5c.8 3 3 5.2 6 6C13 48 34 48 34 48s21 0 26.5-1.5c3-.8 5.2-3 6-6C68 35 68 24 68 24s0-11-1.5-16.5z" fill="#FF0000"/><path d="M45 24 27 14v20z" fill="#fff"/></svg>
+            <span class="yt-label">YouTubeで公開予定</span>
+          </div>
+        </div>
+        <div class="vc-caption">
+          <span class="vc-tag">プロモーションビデオ2</span>
+          <p>JFF-01の各部をクローズアップで紹介するプロモーション動画です。</p>
+        </div>
+      </div>
+
+      <div class="video-card">
+        <div class="video-thumb is-pending" data-youtube-url="https://youtube.com/shorts/Ucl1_U6MT68?feature=share">
+          <div class="yt-badge">
+            <svg viewBox="0 0 68 48" aria-hidden="true"><path d="M66.5 7.5c-.8-3-3-5.2-6-6C55 0 34 0 34 0S13 0 7.5 1.5c-3 .8-5.2 3-6 6C0 13 0 24 0 24s0 11 1.5 16.5c.8 3 3 5.2 6 6C13 48 34 48 34 48s21 0 26.5-1.5c3-.8 5.2-3 6-6C68 35 68 24 68 24s0-11-1.5-16.5z" fill="#FF0000"/><path d="M45 24 27 14v20z" fill="#fff"/></svg>
+            <span class="yt-label">YouTubeで公開予定</span>
+          </div>
+        </div>
+        <div class="vc-caption">
+          <span class="vc-tag">プロモーションビデオ3</span>
+          <p>JFF-01の魅力をご紹介するプロモーション動画です。</p>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -206,12 +231,12 @@
     <div class="section-head reveal">
       <div class="eyebrow">THIS HULL, ACTUALLY...</div>
       <h2>この船体、実は。。。</h2>
-      <p>ウレタン船体・オートクルーズ・ジャイロ・トリガーロック・ガードフレームなど、JFF-01ならではの工夫を短い動画でご紹介します。</p>
+      <p>ウレタン船体・オートクルーズ・ジャイロ・トリガーロック・ガードフレーム・カーボンフレームなど、JFF-01ならではの工夫を短い動画でご紹介します。</p>
     </div>
     <div class="video-grid reveal">
 
       <div class="video-card">
-        <div class="video-thumb is-pending" data-youtube-url="">
+        <div class="video-thumb is-pending" data-youtube-url="https://youtube.com/shorts/C8f3s4ryAIQ?feature=share">
           <div class="yt-badge">
             <svg viewBox="0 0 68 48" aria-hidden="true"><path d="M66.5 7.5c-.8-3-3-5.2-6-6C55 0 34 0 34 0S13 0 7.5 1.5c-3 .8-5.2 3-6 6C0 13 0 24 0 24s0 11 1.5 16.5c.8 3 3 5.2 6 6C13 48 34 48 34 48s21 0 26.5-1.5c3-.8 5.2-3 6-6C68 35 68 24 68 24s0-11-1.5-16.5z" fill="#FF0000"/><path d="M45 24 27 14v20z" fill="#fff"/></svg>
             <span class="yt-label">YouTubeで公開予定</span>
@@ -224,7 +249,7 @@
       </div>
 
       <div class="video-card">
-        <div class="video-thumb is-pending" data-youtube-url="">
+        <div class="video-thumb is-pending" data-youtube-url="https://youtube.com/shorts/kY0_ttsExeo?feature=share">
           <div class="yt-badge">
             <svg viewBox="0 0 68 48" aria-hidden="true"><path d="M66.5 7.5c-.8-3-3-5.2-6-6C55 0 34 0 34 0S13 0 7.5 1.5c-3 .8-5.2 3-6 6C0 13 0 24 0 24s0 11 1.5 16.5c.8 3 3 5.2 6 6C13 48 34 48 34 48s21 0 26.5-1.5c3-.8 5.2-3 6-6C68 35 68 24 68 24s0-11-1.5-16.5z" fill="#FF0000"/><path d="M45 24 27 14v20z" fill="#fff"/></svg>
             <span class="yt-label">YouTubeで公開予定</span>
@@ -237,7 +262,7 @@
       </div>
 
       <div class="video-card">
-        <div class="video-thumb is-pending" data-youtube-url="">
+        <div class="video-thumb is-pending" data-youtube-url="https://youtube.com/shorts/I9Rh2gb30B4?feature=share">
           <div class="yt-badge">
             <svg viewBox="0 0 68 48" aria-hidden="true"><path d="M66.5 7.5c-.8-3-3-5.2-6-6C55 0 34 0 34 0S13 0 7.5 1.5c-3 .8-5.2 3-6 6C0 13 0 24 0 24s0 11 1.5 16.5c.8 3 3 5.2 6 6C13 48 34 48 34 48s21 0 26.5-1.5c3-.8 5.2-3 6-6C68 35 68 24 68 24s0-11-1.5-16.5z" fill="#FF0000"/><path d="M45 24 27 14v20z" fill="#fff"/></svg>
             <span class="yt-label">YouTubeで公開予定</span>
@@ -250,7 +275,7 @@
       </div>
 
       <div class="video-card">
-        <div class="video-thumb is-pending" data-youtube-url="">
+        <div class="video-thumb is-pending" data-youtube-url="https://youtube.com/shorts/L2AB2Nq7ttc?feature=share">
           <div class="yt-badge">
             <svg viewBox="0 0 68 48" aria-hidden="true"><path d="M66.5 7.5c-.8-3-3-5.2-6-6C55 0 34 0 34 0S13 0 7.5 1.5c-3 .8-5.2 3-6 6C0 13 0 24 0 24s0 11 1.5 16.5c.8 3 3 5.2 6 6C13 48 34 48 34 48s21 0 26.5-1.5c3-.8 5.2-3 6-6C68 35 68 24 68 24s0-11-1.5-16.5z" fill="#FF0000"/><path d="M45 24 27 14v20z" fill="#fff"/></svg>
             <span class="yt-label">YouTubeで公開予定</span>
@@ -263,7 +288,7 @@
       </div>
 
       <div class="video-card">
-        <div class="video-thumb is-pending" data-youtube-url="">
+        <div class="video-thumb is-pending" data-youtube-url="https://youtube.com/shorts/PaXsu_iUC2U?feature=share">
           <div class="yt-badge">
             <svg viewBox="0 0 68 48" aria-hidden="true"><path d="M66.5 7.5c-.8-3-3-5.2-6-6C55 0 34 0 34 0S13 0 7.5 1.5c-3 .8-5.2 3-6 6C0 13 0 24 0 24s0 11 1.5 16.5c.8 3 3 5.2 6 6C13 48 34 48 34 48s21 0 26.5-1.5c3-.8 5.2-3 6-6C68 35 68 24 68 24s0-11-1.5-16.5z" fill="#FF0000"/><path d="M45 24 27 14v20z" fill="#fff"/></svg>
             <span class="yt-label">YouTubeで公開予定</span>
@@ -272,6 +297,19 @@
         <div class="vc-caption">
           <span class="vc-tag">ガードフレーム</span>
           <p>プロペラ・駆動部を守るガードフレーム（柵）の様子です。</p>
+        </div>
+      </div>
+
+      <div class="video-card">
+        <div class="video-thumb is-pending" data-youtube-url="https://youtube.com/shorts/ahAKIMFtx7M?feature=share">
+          <div class="yt-badge">
+            <svg viewBox="0 0 68 48" aria-hidden="true"><path d="M66.5 7.5c-.8-3-3-5.2-6-6C55 0 34 0 34 0S13 0 7.5 1.5c-3 .8-5.2 3-6 6C0 13 0 24 0 24s0 11 1.5 16.5c.8 3 3 5.2 6 6C13 48 34 48 34 48s21 0 26.5-1.5c3-.8 5.2-3 6-6C68 35 68 24 68 24s0-11-1.5-16.5z" fill="#FF0000"/><path d="M45 24 27 14v20z" fill="#fff"/></svg>
+            <span class="yt-label">YouTubeで公開予定</span>
+          </div>
+        </div>
+        <div class="vc-caption">
+          <span class="vc-tag">カーボン</span>
+          <p>カーボン素材を使用したフレーム部分のご紹介です。</p>
         </div>
       </div>
 
@@ -290,7 +328,7 @@
     <div class="video-grid reveal">
 
       <div class="video-card">
-        <div class="video-thumb is-pending" data-youtube-url="">
+        <div class="video-thumb is-pending" data-youtube-url="https://youtube.com/shorts/w2HnKmv88sQ?feature=share">
           <div class="yt-badge">
             <svg viewBox="0 0 68 48" aria-hidden="true"><path d="M66.5 7.5c-.8-3-3-5.2-6-6C55 0 34 0 34 0S13 0 7.5 1.5c-3 .8-5.2 3-6 6C0 13 0 24 0 24s0 11 1.5 16.5c.8 3 3 5.2 6 6C13 48 34 48 34 48s21 0 26.5-1.5c3-.8 5.2-3 6-6C68 35 68 24 68 24s0-11-1.5-16.5z" fill="#FF0000"/><path d="M45 24 27 14v20z" fill="#fff"/></svg>
             <span class="yt-label">YouTubeで公開予定</span>
@@ -303,7 +341,7 @@
       </div>
 
       <div class="video-card">
-        <div class="video-thumb is-pending" data-youtube-url="">
+        <div class="video-thumb is-pending" data-youtube-url="https://youtube.com/shorts/58yz2zrFRAE?feature=share">
           <div class="yt-badge">
             <svg viewBox="0 0 68 48" aria-hidden="true"><path d="M66.5 7.5c-.8-3-3-5.2-6-6C55 0 34 0 34 0S13 0 7.5 1.5c-3 .8-5.2 3-6 6C0 13 0 24 0 24s0 11 1.5 16.5c.8 3 3 5.2 6 6C13 48 34 48 34 48s21 0 26.5-1.5c3-.8 5.2-3 6-6C68 35 68 24 68 24s0-11-1.5-16.5z" fill="#FF0000"/><path d="M45 24 27 14v20z" fill="#fff"/></svg>
             <span class="yt-label">YouTubeで公開予定</span>
@@ -316,7 +354,7 @@
       </div>
 
       <div class="video-card">
-        <div class="video-thumb is-pending" data-youtube-url="">
+        <div class="video-thumb is-pending" data-youtube-url="https://youtube.com/shorts/qUfRrUsu_T0?feature=share">
           <div class="yt-badge">
             <svg viewBox="0 0 68 48" aria-hidden="true"><path d="M66.5 7.5c-.8-3-3-5.2-6-6C55 0 34 0 34 0S13 0 7.5 1.5c-3 .8-5.2 3-6 6C0 13 0 24 0 24s0 11 1.5 16.5c.8 3 3 5.2 6 6C13 48 34 48 34 48s21 0 26.5-1.5c3-.8 5.2-3 6-6C68 35 68 24 68 24s0-11-1.5-16.5z" fill="#FF0000"/><path d="M45 24 27 14v20z" fill="#fff"/></svg>
             <span class="yt-label">YouTubeで公開予定</span>
@@ -328,27 +366,30 @@
         </div>
       </div>
 
-      <!-- TODO: プロポ説明動画(プロポ説明動画.mp4, 約29.7MB)を追加。
-           ファイルサイズの都合でまだアップロードできていないため、
-           一旦「準備中」のプレースホルダーにしています。
-           動画を軽量化するか、videos/remote-control.mp4 として配置後、
-           下記コメントを外して <video> に差し替えてください。
+    </div>
+  </div>
+</section>
+
+<!-- ─── 使用方法 ─── -->
+<section class="video-section" id="how-to-use">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">HOW TO USE</div>
+      <h2>使用方法</h2>
+      <p>プロポ(リモコン)の操作方法をご紹介します。</p>
+    </div>
+    <div class="video-grid reveal">
+
       <div class="video-card">
-        <video controls playsinline preload="metadata" poster="videos/remote-control.jpg" src="videos/remote-control.mp4"></video>
+        <div class="video-thumb is-pending" data-youtube-url="https://youtube.com/shorts/tQprwKgYG4E?feature=share">
+          <div class="yt-badge">
+            <svg viewBox="0 0 68 48" aria-hidden="true"><path d="M66.5 7.5c-.8-3-3-5.2-6-6C55 0 34 0 34 0S13 0 7.5 1.5c-3 .8-5.2 3-6 6C0 13 0 24 0 24s0 11 1.5 16.5c.8 3 3 5.2 6 6C13 48 34 48 34 48s21 0 26.5-1.5c3-.8 5.2-3 6-6C68 35 68 24 68 24s0-11-1.5-16.5z" fill="#FF0000"/><path d="M45 24 27 14v20z" fill="#fff"/></svg>
+            <span class="yt-label">YouTubeで公開予定</span>
+          </div>
+        </div>
         <div class="vc-caption">
-          <span class="vc-tag">プロポ操作説明</span>
+          <span class="vc-tag">プロポの使用方法</span>
           <p>リモコン(プロポ)の操作方法を説明する動画です。</p>
-        </div>
-      </div>
-      -->
-      <div class="video-card is-pending">
-        <div class="video-placeholder">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="15" height="14" rx="2"/><path d="M21 8l-3 2.5L21 13V8z"/></svg>
-          <span>準備中</span>
-        </div>
-        <div class="vc-caption">
-          <span class="vc-tag is-pending">プロポ操作説明</span>
-          <p>リモコン(プロポ)の操作方法を説明する動画です。近日公開予定です。</p>
         </div>
       </div>
 
