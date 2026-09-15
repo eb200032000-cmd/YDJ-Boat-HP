@@ -429,7 +429,12 @@
       thumb.setAttribute('role', 'link');
       thumb.setAttribute('tabindex', '0');
       thumb.setAttribute('aria-label', 'YouTubeで再生');
-      function openIt() { window.open(url, '_blank', 'noopener'); }
+      // Shorts形式(youtube.com/shorts/xxx)のまま開くと、YouTube側で上下スワイプすると
+      // 無関係な他チャンネルのShortsに流れてしまうため、通常の視聴ページ
+      // (watch?v=xxx)形式に変換してから開く。これにより、開いた直後に見えるのは
+      // 必ずこちらでリンクした動画になる。
+      var openUrl = videoId ? ('https://www.youtube.com/watch?v=' + videoId) : url;
+      function openIt() { window.open(openUrl, '_blank', 'noopener'); }
       thumb.addEventListener('click', openIt);
       thumb.addEventListener('keydown', function (e) {
         if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openIt(); }
