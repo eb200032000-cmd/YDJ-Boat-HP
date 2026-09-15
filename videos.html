@@ -52,6 +52,29 @@
   .vc-tag.is-pending{color:var(--ink-dim);}
   .vc-caption p{margin:6px 0 0;font-size:13px;color:var(--ink-dim);line-height:1.65;}
 
+  /* ─── スマホ(画面幅600px以下): 縦にひたすらスクロールさせず、
+       セクションごとに横スワイプでカードを見られるようにする ─── */
+  @media(max-width:600px){
+    .video-grid{
+      display:flex;
+      flex-wrap:nowrap;
+      overflow-x:auto;
+      scroll-snap-type:x mandatory;
+      -webkit-overflow-scrolling:touch;
+      gap:14px;
+      margin:0 -24px;
+      padding:2px 24px 14px;
+      scrollbar-width:none;
+    }
+    .video-grid::-webkit-scrollbar{display:none;}
+    .video-grid .video-card{
+      flex:0 0 auto;
+      width:68vw;
+      max-width:260px;
+      scroll-snap-align:start;
+    }
+  }
+
   /* ─── YouTube導線(仮対応): 動画ファイルが重くGitHubに置けないため、
        「YouTubeで見る」導線のみ用意。サムネイルは自前で用意せず、
        各 .video-thumb の data-youtube-url に実際のURLを入れると
