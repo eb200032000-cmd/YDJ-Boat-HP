@@ -40,18 +40,7 @@
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700;900&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="common.css">
 <style>
-  /* ─── Video hero (プロモーション / こだわり紹介など、1本を大きく見せる) ─── */
-  .video-hero-section{padding-bottom:80px;}
-  .video-hero-wrap{
-    max-width:340px;margin:0 auto;
-    border:1px solid var(--line);border-radius:var(--radius-md);overflow:hidden;
-    background:#000;box-shadow:var(--shadow-md);
-  }
-  .video-hero-wrap .video-thumb{aspect-ratio:9/16;}
-  .video-hero-cap{margin:18px auto 0;max-width:480px;text-align:center;color:var(--ink-dim);font-size:14px;line-height:1.7;}
-  @media(max-width:480px){.video-hero-wrap{max-width:280px;}}
-
-  /* ─── Video grid (機能紹介・試してみた 等) ─── */
+  /* ─── Video grid (プロモーション・機能紹介・試してみた 等) ─── */
   .video-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:20px;}
   .video-card{
     background:var(--panel-2);border:1px solid var(--line);border-radius:var(--radius-md);overflow:hidden;
@@ -202,25 +191,6 @@
         </div>
       </div>
 
-    </div>
-  </div>
-</section>
-
-<!-- ─── こだわり紹介 ─── -->
-<section class="video-section video-hero-section">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <div class="eyebrow">COMMITMENT</div>
-      <h2>こだわり紹介</h2>
-      <p>実際の走行シーンとともに、この船体のこだわりをご紹介します。</p>
-    </div>
-    <div class="video-hero-wrap reveal">
-      <div class="video-thumb is-pending" data-youtube-url="">
-        <div class="yt-badge">
-          <svg viewBox="0 0 68 48" aria-hidden="true"><path d="M66.5 7.5c-.8-3-3-5.2-6-6C55 0 34 0 34 0S13 0 7.5 1.5c-3 .8-5.2 3-6 6C0 13 0 24 0 24s0 11 1.5 16.5c.8 3 3 5.2 6 6C13 48 34 48 34 48s21 0 26.5-1.5c3-.8 5.2-3 6-6C68 35 68 24 68 24s0-11-1.5-16.5z" fill="#FF0000"/><path d="M45 24 27 14v20z" fill="#fff"/></svg>
-          <span class="yt-label">YouTubeで公開予定</span>
-        </div>
-      </div>
     </div>
   </div>
 </section>
