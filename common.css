@@ -117,6 +117,13 @@ header .wrap{display:flex;align-items:center;justify-content:space-between;heigh
 .logo{font-family:var(--cond);font-weight:700;letter-spacing:.04em;font-size:15px;text-decoration:none;transition:opacity .2s;}
 .logo:hover{opacity:.85;}
 .logo span{color:var(--accent);}
+.logo{display:inline-flex;align-items:center;}
+.logo img{display:block;height:30px;width:auto;}
+/* PCでメニューが横一列に並ぶ幅(1181px以上)では、メニューと重ならないようエンブレム部分のみ表示。
+   ハンバーガーメニュー表示(1180px以下)ではエンブレム+LAXASロゴを表示 */
+@media(min-width:1181px){.logo img{width:92px;object-fit:cover;object-position:left center;}}
+@media(min-width:1181px) and (max-width:1320px){nav#siteNav ul{gap:14px;}}
+@media(max-width:480px){.logo img{height:26px;}}
 
 nav#siteNav ul{display:flex;gap:20px;list-style:none;margin:0;padding:0;flex-wrap:wrap;}
 nav#siteNav a{
@@ -191,6 +198,9 @@ footer .f-links a{
 footer .f-links a:hover{color:var(--ink);}
 footer .f-logo{font-family:var(--cond);font-size:13px;letter-spacing:.06em;color:var(--ink-dim);text-decoration:none;}
 footer .f-logo span{color:var(--accent);}
+footer .f-logo{display:inline-flex;align-items:center;gap:14px;flex-wrap:wrap;}
+footer .f-logo img{display:block;height:26px;width:auto;opacity:.9;}
+footer .f-logo small{font-family:var(--display);font-size:12px;letter-spacing:.04em;color:var(--ink-dim);}
 footer .copy{font-family:var(--mono);font-size:11px;color:var(--ink-faint);width:100%;padding-top:12px;border-top:1px solid var(--line);margin-top:8px;}
 
 /* ============================================================

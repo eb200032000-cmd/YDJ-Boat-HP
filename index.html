@@ -3,25 +3,25 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>YOSHIDA KAKO ｜ 農薬散布ボート JFF-01</title>
-<meta name="description" content="吉田化工株式会社の電動農薬散布ボート「JFF-01」公式サイト。プロペラ推進式で水田・水路の農薬散布を効率化。製品特徴・スペック・操船トレーニングシミュレーター・カラーシミュレーターをご紹介します。">
+<title>LAXAS ｜ 電動農薬散布ボート</title>
+<meta name="description" content="吉田化工株式会社の電動農薬散布ボート「LAXAS」公式サイト。プロペラ推進式で水田・水路の農薬散布を効率化。製品特徴・スペック・操船トレーニングシミュレーター・カラーシミュレーターをご紹介します。">
 <!-- ドメインが確定したら、下記 og:url / og:image / canonical の URL を実際の公開ドメインに差し替えてください -->
 <link rel="canonical" href="https://www.yoshida-kako.co.jp/">
 
 <!-- ─── OGP / SNSシェア用 ─── -->
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="YOSHIDA KAKO（吉田化工株式会社）">
+<meta property="og:site_name" content="LAXAS（吉田化工株式会社）">
 <meta property="og:locale" content="ja_JP">
-<meta property="og:title" content="YOSHIDA KAKO ｜ 電動農薬散布ボート JFF-01">
-<meta property="og:description" content="プロペラ推進式の電動農薬散布ボート「JFF-01」。水田・水路の農薬散布を効率化する製品の特徴・スペック・シミュレーターをご紹介します。">
+<meta property="og:title" content="LAXAS ｜ 電動農薬散布ボート">
+<meta property="og:description" content="プロペラ推進式の電動農薬散布ボート「LAXAS」。水田・水路の農薬散布を効率化する製品の特徴・スペック・シミュレーターをご紹介します。">
 <meta property="og:url" content="https://www.yoshida-kako.co.jp/">
 <meta property="og:image" content="https://www.yoshida-kako.co.jp/og-image.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="YOSHIDA KAKO 電動農薬散布ボート JFF-01">
+<meta property="og:image:alt" content="LAXAS 電動農薬散布ボート">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="YOSHIDA KAKO ｜ 電動農薬散布ボート JFF-01">
-<meta name="twitter:description" content="プロペラ推進式の電動農薬散布ボート「JFF-01」。水田・水路の農薬散布を効率化する製品をご紹介します。">
+<meta name="twitter:title" content="LAXAS ｜ 電動農薬散布ボート">
+<meta name="twitter:description" content="プロペラ推進式の電動農薬散布ボート「LAXAS」。水田・水路の農薬散布を効率化する製品をご紹介します。">
 <meta name="twitter:image" content="https://www.yoshida-kako.co.jp/og-image.jpg">
 
 <!-- ─── Home screen / favicon icons ─── -->
@@ -34,7 +34,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="YOSHIDA KAKO">
+<meta name="apple-mobile-web-app-title" content="LAXAS">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -360,6 +360,35 @@
     color:var(--accent);letter-spacing:.02em;
   }
 
+
+  /* ─── LAXAS ブランドロゴ(ヒーロー) ─── */
+  .hero-brand{display:block;width:clamp(200px,32vw,380px);height:auto;margin:0 0 28px;
+    filter:drop-shadow(0 6px 24px rgba(0,0,0,.55));
+    opacity:0;transform:translateY(10px);animation:heroIn .8s var(--ease-out) 0s forwards;}
+  @media(prefers-reduced-motion:reduce){.hero-brand{animation:none;opacity:1;transform:none;}}
+
+  /* ─── Brand(ブランド名の由来) ─── */
+  .brand{background:var(--bg);position:relative;overflow:hidden;}
+  .brand-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:64px;align-items:center;}
+  @media(max-width:900px){.brand-grid{grid-template-columns:1fr;gap:36px;}}
+  .brand-mark{display:flex;flex-direction:column;align-items:center;gap:20px;padding:40px 24px;
+    border:1px solid var(--line);border-radius:var(--radius-lg);
+    background:radial-gradient(ellipse at 50% 40%,rgba(236,237,239,.07),transparent 70%),var(--panel);}
+  .brand-mark img{width:100%;max-width:420px;height:auto;display:block;}
+  .brand-mark .ruby{font-family:var(--cond);letter-spacing:.3em;font-size:12px;color:var(--ink-faint);text-transform:uppercase;}
+  .brand h2{font-size:clamp(28px,4vw,42px);margin-top:14px;line-height:1.3;}
+  .brand-lead{color:var(--ink-dim);font-size:16px;margin:18px 0 28px;}
+  .brand-parts{list-style:none;margin:0;padding:0;display:grid;gap:12px;}
+  .brand-parts li{display:grid;grid-template-columns:84px 1fr;gap:18px;align-items:start;
+    padding:16px 18px;border:1px solid var(--line);border-radius:var(--radius-md);background:var(--panel);
+    transition:border-color .2s var(--ease-out),transform .2s var(--ease-out);}
+  .brand-parts li:hover{border-color:var(--line-strong);transform:translateY(-2px);}
+  .brand-parts .key{font-family:var(--cond);font-weight:700;font-size:26px;line-height:1;letter-spacing:.06em;
+    background:linear-gradient(180deg,#FFFFFF,#9AA0A6);-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .brand-parts .key small{display:block;font-size:11px;letter-spacing:.12em;margin-top:6px;color:var(--accent);-webkit-text-fill-color:var(--accent);}
+  .brand-parts h3{font-size:15px;font-weight:700;margin:0 0 4px;}
+  .brand-parts p{margin:0;color:var(--ink-dim);font-size:14px;line-height:1.75;}
+  @media(max-width:480px){.brand-parts li{grid-template-columns:64px 1fr;gap:12px;}.brand-parts .key{font-size:22px;}}
 </style>
 </head>
 <body id="top">
@@ -376,7 +405,7 @@
 <!-- ─── Header ─── -->
 <header>
   <div class="wrap">
-    <a class="logo" href="index.html">YOSHIDA KAKO<span>KK</span></a>
+    <a class="logo" href="index.html"><img src="brand/laxas-lockup.png" alt="LAXAS" width="252" height="30"></a>
     <button class="nav-toggle" id="navToggle" type="button" aria-label="メニューを開く" aria-expanded="false" aria-controls="siteNav">
       <span></span><span></span><span></span>
     </button>
@@ -407,9 +436,10 @@
   <div class="hero-glow" aria-hidden="true"></div>
   <div class="hero-content">
     <div class="wrap">
+      <img class="hero-brand" src="brand/laxas-logo.png" alt="LAXAS BOAT SPRAYER" width="900" height="407">
       <div class="eyebrow">農薬散布ボート / AGRICULTURAL SPRAY BOAT</div>
       <h1>田んぼの上を、<br>走らせる。</h1>
-      <p class="lead">YOSHIDA KAKOが開発する電動農薬散布ボート。ウレタン製の軽量船体と大型プロペラが生み出す推進力で、水田を自在に走りながら薬剤を届けます。</p>
+      <p class="lead">LAXASは、吉田化工が開発する電動農薬散布ボート。ウレタン製の軽量船体と大型プロペラが生み出す推進力で、水田を自在に走りながら薬剤を届けます。</p>
       <div class="cta-row">
         <a href="#contact" class="btn btn-primary">お問い合わせはこちら</a>
         <a href="#features" class="btn btn-ghost">特徴を見る</a>
@@ -471,7 +501,7 @@
     <div class="gallery-top reveal">
       <div class="section-head">
         <div class="eyebrow">GALLERY</div>
-        <h2>証拠写真で見る、JFF-01。</h2>
+        <h2>証拠写真で見る、LAXAS。</h2>
         <p>全景から船体・散布シーンまで、1枚ごとに見どころを絞った構成です。</p>
       </div>
       <div class="gallery-nav">
@@ -491,7 +521,7 @@
       <!-- 1. 全景 -->
       <div class="g-slide">
         <div class="g-media has-photo" data-lightbox-src="img05.jpg" data-lightbox-caption="実機の全景 — 水田のそばに置いた様子">
-          <img src="img05.jpg" alt="JFF-01 全景。田んぼのそばに置いた実機" loading="lazy">
+          <img src="img05.jpg" alt="LAXAS 全景。田んぼのそばに置いた実機" loading="lazy">
         </div>
         <div class="g-caption">
           <span class="g-tag">実機の全景</span>
@@ -502,7 +532,7 @@
       <!-- 2. カーボンフレーム -->
       <div class="g-slide">
         <div class="g-media has-photo is-contain" data-lightbox-src="img10.jpg" data-lightbox-caption="カーボンフレームのクローズアップ">
-          <img src="img10.jpg" alt="JFF-01 カーボン柄フレームのクローズアップ" loading="lazy">
+          <img src="img10.jpg" alt="LAXAS カーボン柄フレームのクローズアップ" loading="lazy">
         </div>
         <div class="g-caption">
           <span class="g-tag">カーボンフレーム</span>
@@ -513,7 +543,7 @@
       <!-- 3. 散布の様子 -->
       <div class="g-slide">
         <div class="g-media has-photo" data-lightbox-src="img07.jpg" data-lightbox-caption="散布の様子 — ノズルからの薬剤噴射">
-          <img src="img07.jpg" alt="JFF-01 ノズルからの薬剤噴射・散布の様子" loading="lazy">
+          <img src="img07.jpg" alt="LAXAS ノズルからの薬剤噴射・散布の様子" loading="lazy">
         </div>
         <div class="g-caption">
           <span class="g-tag">散布の様子</span>
@@ -524,7 +554,7 @@
       <!-- 4. サイズ感 -->
       <div class="g-slide">
         <div class="g-media has-photo" data-lightbox-src="img08.jpg" data-lightbox-caption="サイズ感 — メジャーで計測した様子">
-          <img src="img08.jpg" alt="JFF-01 メジャーを並べて撮影したサイズ感がわかるカット" loading="lazy">
+          <img src="img08.jpg" alt="LAXAS メジャーを並べて撮影したサイズ感がわかるカット" loading="lazy">
         </div>
         <div class="g-caption">
           <span class="g-tag">サイズ感</span>
@@ -535,7 +565,7 @@
       <!-- 5. 実走の様子 -->
       <div class="g-slide">
         <div class="g-media has-photo" data-lightbox-src="img09.jpg" data-lightbox-caption="実走の様子 — 水田で稼働中">
-          <img src="img09.jpg" alt="JFF-01 田んぼで実際に走行している様子" loading="lazy">
+          <img src="img09.jpg" alt="LAXAS 田んぼで実際に走行している様子" loading="lazy">
         </div>
         <div class="g-caption">
           <span class="g-tag">実走の様子</span>
@@ -878,6 +908,42 @@
   </div>
 </section>
 
+<!-- ─── Brand(ブランド名の由来) ─── -->
+<section class="brand" id="brand">
+  <div class="wrap">
+    <div class="brand-grid">
+      <div class="brand-mark reveal">
+        <img src="brand/laxas-logo.png" alt="LAXAS BOAT SPRAYER ロゴ" width="900" height="407" loading="lazy">
+        <div class="ruby">Brand Name</div>
+      </div>
+      <div class="reveal">
+        <div class="eyebrow">BRAND STORY</div>
+        <h2>LAXAS という名前に<br>込めたもの。</h2>
+        <p class="brand-lead">日本語の「楽（RAKU）」の響きをそのまま活かし、作業を楽にしてくれるボートであること。そこに、先進技術と未来への想いを掛け合わせました。</p>
+        <ul class="brand-parts">
+          <li>
+            <div class="key">LA<small>楽 / RAKU</small></div>
+            <div><h3>楽をさせてくれるボート</h3><p>「楽（RAKU）」の響きから。重い動噴を背負って歩く散布作業を、田んぼのそばで操作するだけの「楽」な作業へ。</p></div>
+          </li>
+          <li>
+            <div class="key">X<small>TECHNOLOGY</small></div>
+            <div><h3>未知の可能性・先進技術</h3><p>ジャイロ制御や高出力モーターを搭載した「最先端の農業マシン」としての機動力とテクノロジーを表しています。</p></div>
+          </li>
+          <li>
+            <div class="key">LUX<small>LUXURY</small></div>
+            <div><h3>高級・ハイスペック</h3><p>素材から設計まで妥協しない、プロフェッショナルのための上質な一台であること。</p></div>
+          </li>
+          <li>
+            <div class="key">AS<small>明日 / AGRI SYSTEM</small></div>
+            <div><h3>明日（未来）の農業システム</h3><p>「明日＝未来」、そして「Agri System」。これからの農業を支える仕組みでありたいという想いを込めました。</p></div>
+          </li>
+        </ul>
+        <p class="brand-lead" style="margin:24px 0 0;">最後の文字「S」が生む流れるような疾走感は、力強く水面を滑走するエアボートの姿そのものです。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ─── Story ─── -->
 <section class="story">
   <div class="wrap">
@@ -889,10 +955,10 @@
         <blockquote>農家の負担を減らす。<br>それが、私たちの出発点。</blockquote>
         <div class="body" style="margin-top:28px;">
           <p>農薬散布は長らく重労働の代名詞でした。重い動噴を背負って田んぼを歩き回る作業は、真夏の炎天下では体に大きな負担がかかります。</p>
-          <p>YOSHIDA KAKOは、ウレタム素材のプロとして長年培ってきた加工技術と、電動推進システムを組み合わせることで、「水面を走る散布ボート」という新しいアプローチで、この課題に向き合っています。</p>
+          <p>LAXASは、ウレタン素材のプロ・吉田化工が長年培ってきた加工技術と、電動推進システムを組み合わせることで、「水面を走る散布ボート」という新しいアプローチで、この課題に向き合っています。</p>
           <p>田んぼのそばに立ち、機体を走らせるだけ ー そんな当たり前のように見える未来を、一台ずつ丁寧に作り届けます。</p>
         </div>
-        <div class="signature">— YOSHIDA KAKO 開発チーム</div>
+        <div class="signature">— LAXAS 開発チーム</div>
       </div>
     </div>
   </div>
@@ -940,7 +1006,7 @@
 
 <footer>
   <div class="wrap">
-    <a class="f-logo" href="index.html">吉田化工<span>株式会社</span></a>
+    <a class="f-logo" href="index.html"><img src="brand/laxas-lockup.png" alt="LAXAS" width="235" height="28"><small>製造・販売 吉田化工株式会社</small></a>
     <div class="f-links">
       <a href="simulator.html">操船シミュレーター</a>
       <a href="color.html">カラーシミュレーター</a>
@@ -948,7 +1014,7 @@
       <a href="company.html">会社概要</a>
       <a href="#contact">お問い合わせ</a>
     </div>
-    <div class="copy">&copy; 2026 YOSHIDA KAKO. All rights reserved.</div>
+    <div class="copy">&copy; 2026 LAXAS / 吉田化工株式会社. All rights reserved.</div>
   </div>
 </footer>
 

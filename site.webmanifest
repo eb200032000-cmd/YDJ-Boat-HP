@@ -1,6 +1,6 @@
 {
-  "name": "YOSHIDA KAKO ｜ 農薬散布ボート JFF-01",
-  "short_name": "YOSHIDA KAKO",
+  "name": "LAXAS ｜ 電動農薬散布ボート",
+  "short_name": "LAXAS",
   "icons": [
     { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
     { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png" }
