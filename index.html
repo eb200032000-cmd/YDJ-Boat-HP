@@ -212,22 +212,6 @@
     .feat-block .fb-body{padding:36px 24px;}
   }
 
-  /* ─── Pump / Gyro (spec) ─── */
-  .specs{background:var(--panel);}
-  .spec-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px;background:var(--line);}
-  @media(max-width:720px){.spec-grid{grid-template-columns:1fr;}}
-  .spec-card{background:var(--bg);padding:44px 40px;transition:background .25s var(--ease-out),box-shadow .25s var(--ease-out);}
-  .spec-card:hover{background:var(--panel-3);box-shadow:inset 0 1px 0 var(--line);}
-  .spec-card .sc-icon{
-    width:44px;height:44px;border-radius:50%;flex-shrink:0;
-    background:rgba(95,184,255,.12);border:1px solid rgba(95,184,255,.3);
-    display:flex;align-items:center;justify-content:center;margin-bottom:18px;
-  }
-  .spec-card .sc-icon svg{width:20px;height:20px;color:var(--blue);}
-  .spec-card .sc-tag{font-family:var(--cond);font-size:12px;text-transform:uppercase;letter-spacing:.14em;color:var(--blue);margin-bottom:16px;display:block;}
-  .spec-card h3{font-size:21px;}
-  .spec-card p{color:var(--ink-dim);font-size:14.5px;margin-top:14px;line-height:1.75;}
-
   /* ─── Process ─── */
   .process{background:var(--bg);}
   .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--line);}
@@ -626,7 +610,7 @@
   <div class="wrap">
     <div class="section-head reveal">
       <div class="eyebrow">FEATURES</div>
-      <h2>こだわり抜いた、<br>2つの設計。</h2>
+      <h2>こだわり抜いた、<br>3つの設計。</h2>
     </div>
   </div>
 
@@ -671,34 +655,26 @@
       </div>
     </div>
 
-  </div>
-</section>
-
-<!-- ─── Pump / Gyro (スペック) ─── -->
-<section class="specs" id="specs">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <div class="eyebrow">PUMP & CONTROL / SPEC</div>
-      <h2>散布性能と操縦性。</h2>
-    </div>
-    <div class="spec-grid reveal">
-      <div class="spec-card">
-        <div class="sc-icon">
+    <!-- ポンプ・操縦性(旧「散布性能と操縦性」セクションを特徴の3つ目として統合) -->
+    <div class="feat-block reveal" id="specs">
+      <div class="fb-img">
+        <img src="img02.webp" alt="機体後方から見た操縦・散布ユニット" loading="lazy">
+      </div>
+      <div class="fb-body">
+        <span class="fb-tag">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c3 4 6 7.5 6 11a6 6 0 0 1-12 0c0-3.5 3-7 6-11z"/></svg>
-        </div>
-        <span class="sc-tag">Pump / ポンプ</span>
-        <h3>精密に、確実に。<br>高性能ダイヤフラムポンプ。</h3>
-        <p>耐久性・耐薬品性に優れたサントプレン製ダイヤフラムを採用した高性能ポンプを搭載。吐出量は500ml/分〜5.6L/分までダイヤルで無段階に調整可能。同一吐出量でのON/OFFはもちろん、スロットルと連動した吐出切り替えにも対応し、圃場の状況に合わせた柔軟な散布を実現します。</p>
-      </div>
-      <div class="spec-card">
-        <div class="sc-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>
-        </div>
-        <span class="sc-tag">Gyro / 操縦性</span>
-        <h3>ジャイロ内蔵で、<br>直進性とターンが安定。</h3>
-        <p>ジャイロセンサーを内蔵することで、風や水流の影響を受けにくい安定した直進走行を実現。ターン時も姿勢を素早く修正し、意図した軌跡で散布エリアをカバーできます。リモコン操作に不慣れな方でも扱いやすい制御性を提供します。</p>
+          Pump &amp; Control / 散布・操縦性
+        </span>
+        <h3>精密な散布と、<br>安定した操縦性。</h3>
+        <ul class="feat-list">
+          <li>耐久性・耐薬品性に優れたサントプレン製ダイヤフラムを採用した高性能ポンプを搭載。</li>
+          <li>吐出量は500ml/分〜5.6L/分までダイヤルで無段階に調整可能。同一吐出量でのON/OFFに加え、スロットルと連動した吐出切り替えにも対応し、圃場の状況に合わせた柔軟な散布を実現。</li>
+          <li>ジャイロセンサーを内蔵し、風や水流の影響を受けにくい安定した直進走行を実現。</li>
+          <li>ターン時も姿勢を素早く修正し、意図した軌跡で散布エリアをカバー。リモコン操作に不慣れな方でも扱いやすい制御性。</li>
+        </ul>
       </div>
     </div>
+
   </div>
 </section>
 
