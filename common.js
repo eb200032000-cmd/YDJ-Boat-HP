@@ -158,6 +158,57 @@
     update();
   }
 
+
+  /* ---- Contact form (Formspree) ----
+     送信先IDは company-info.js の formspreeId で設定。
+     送信中はボタンを無効化してスピナー表示、結果をフォーム下に表示する。
+  */
+  function initContactForm() {
+    var form = document.getElementById('contactForm');
+    if (!form) return;
+    var btn = document.getElementById('contactSubmit');
+    var status = document.getElementById('contactStatus');
+    var label = btn ? btn.querySelector('.label') : null;
+    var info = window.YK_COMPANY_INFO || {};
+    var id = (info.formspreeId || '').trim();
+    if (id) form.action = 'https://formspree.io/f/' + id;
+
+    function setStatus(msg, type) {
+      status.textContent = msg;
+      status.classList.remove('is-success', 'is-error');
+      if (type) status.classList.add('is-' + type);
+    }
+    function setLoading(on) {
+      btn.disabled = on;
+      btn.classList.toggle('is-loading', on);
+      if (label) label.textContent = on ? '送信中…' : '送信する';
+    }
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (!form.checkValidity()) { form.reportValidity(); return; }
+      if (!id) {
+        setStatus('現在フォームは準備中です。恐れ入りますが、しばらくしてから再度お試しください。', 'error');
+        return;
+      }
+      setLoading(true);
+      setStatus('', null);
+      fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      }).then(function (res) {
+        if (!res.ok) throw new Error('bad status');
+        form.reset();
+        setStatus('送信しました。お問い合わせありがとうございます。担当者より折り返しご連絡いたします。', 'success');
+      }).catch(function () {
+        setStatus('送信できませんでした。通信状況をご確認のうえ、もう一度「送信する」を押してください。', 'error');
+      }).then(function () {
+        setLoading(false);
+      });
+    });
+  }
+
   /* ---- Gallery carousel + lightbox (top page only) ----
      Horizontal swipe carousel (native scroll-snap handles touch/trackpad
      swipe) with prev/next arrow buttons for mouse users, plus a tap-to-
@@ -266,6 +317,7 @@
     initBackToTop();
     initMobileCtaBar();
     initGalleryCarousel();
+    initContactForm();
     initIframeAutoResize();
   }
 

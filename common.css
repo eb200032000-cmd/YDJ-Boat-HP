@@ -16,7 +16,7 @@
   --panel-3:#20232A;
   --ink:#F2F3F5;
   --ink-dim:#9AA0A6;
-  --ink-faint:#6C7278;
+  --ink-faint:#858B92; /* 背景とのコントラスト比4.5:1以上を確保 */
   --accent:#FF6B1A;
   --accent-2:#FFB020;
   --blue:#5FB8FF;
@@ -119,17 +119,16 @@ header .wrap{display:flex;align-items:center;justify-content:space-between;heigh
 .logo span{color:var(--accent);}
 .logo{display:inline-flex;align-items:center;}
 .logo img{display:block;height:30px;width:auto;}
-/* PCでメニューが横一列に並ぶ幅(1181px以上)では、メニューと重ならないようエンブレム部分のみ表示。
-   ハンバーガーメニュー表示(1180px以下)ではエンブレム+LAXASロゴを表示 */
-@media(min-width:1181px){.logo img{width:92px;object-fit:cover;object-position:left center;}}
-@media(min-width:1181px) and (max-width:1320px){nav#siteNav ul{gap:14px;}}
+/* メニュー項目を絞ったため、PCでもエンブレム+LAXASロゴを表示。
+   横幅が狭いPC(1024〜1200px)ではロゴを少し小さくしてメニューと重ならないようにする */
+@media(min-width:1024px) and (max-width:1200px){.logo img{height:24px;}nav#siteNav ul{gap:16px;}}
 @media(max-width:480px){.logo img{height:26px;}}
 
-nav#siteNav ul{display:flex;gap:20px;list-style:none;margin:0;padding:0;flex-wrap:wrap;}
+nav#siteNav ul{display:flex;gap:22px;align-items:center;list-style:none;margin:0;padding:0;flex-wrap:wrap;}
 nav#siteNav a{
   font-family:var(--cond);font-size:12.5px;letter-spacing:.04em;text-transform:uppercase;
   text-decoration:none;color:var(--ink-dim);transition:color .2s var(--ease-out);position:relative;
-  padding:4px 0;white-space:nowrap;
+  padding:12px 0;white-space:nowrap;display:inline-block;
 }
 nav#siteNav a:hover{color:var(--ink);}
 nav#siteNav a.active{color:var(--ink);}
@@ -138,7 +137,16 @@ nav#siteNav a.active::after{
   background:linear-gradient(90deg,var(--accent),var(--accent-2));
   border-radius:2px;
 }
-nav#siteNav li.nav-sep{width:1px;background:var(--line);margin:2px 2px;align-self:stretch;}
+nav#siteNav li.nav-sep{width:1px;height:20px;background:var(--line);margin:0 2px;}
+/* お問い合わせはボタン表示にして目立たせる */
+nav#siteNav a.nav-cta{
+  padding:10px 18px;border-radius:var(--radius-sm);color:#15110A;font-weight:600;
+  background:linear-gradient(135deg,var(--accent),var(--accent-2));
+  transition:box-shadow .25s var(--ease-out),transform .2s var(--ease-out);
+}
+nav#siteNav a.nav-cta:hover{color:#15110A;box-shadow:var(--shadow-glow);}
+nav#siteNav a.nav-cta.active{color:#15110A;}
+nav#siteNav a.nav-cta.active::after{display:none;}
 
 .nav-toggle{
   display:none;background:none;border:0;padding:12px;margin:-12px;cursor:pointer;
@@ -150,7 +158,7 @@ nav#siteNav li.nav-sep{width:1px;background:var(--line);margin:2px 2px;align-sel
 .nav-toggle[aria-expanded="true"] span:nth-child(2){opacity:0;}
 .nav-toggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
 
-@media(max-width:1180px){
+@media(max-width:1023px){
   .nav-toggle{display:flex;}
   nav#siteNav{
     position:fixed;top:var(--header-h);left:0;right:0;
@@ -166,6 +174,7 @@ nav#siteNav li.nav-sep{width:1px;background:var(--line);margin:2px 2px;align-sel
   nav#siteNav a{display:block;padding:14px 24px;font-size:14px;min-height:44px;}
   nav#siteNav a.active::after{display:none;}
   nav#siteNav a.active{color:var(--accent);}
+  nav#siteNav a.nav-cta{margin:8px 24px 12px;text-align:center;display:block;}
 }
 
 /* ============================================================
@@ -191,9 +200,11 @@ nav#siteNav li.nav-sep{width:1px;background:var(--line);margin:2px 2px;align-sel
 footer{border-top:1px solid var(--line);padding:32px 0 calc(32px + env(safe-area-inset-bottom,0px));background:var(--bg);}
 footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
 footer .f-links{display:flex;gap:20px;flex-wrap:wrap;}
+footer .f-links{column-gap:24px;row-gap:0;}
 footer .f-links a{
-  font-family:var(--cond);font-size:12px;letter-spacing:.05em;text-transform:uppercase;
+  font-family:var(--cond);font-size:13px;letter-spacing:.05em;text-transform:uppercase;
   color:var(--ink-dim);text-decoration:none;transition:color .2s;
+  display:inline-flex;align-items:center;min-height:44px; /* タップしやすい高さを確保 */
 }
 footer .f-links a:hover{color:var(--ink);}
 footer .f-logo{font-family:var(--cond);font-size:13px;letter-spacing:.06em;color:var(--ink-dim);text-decoration:none;}

@@ -11,6 +11,11 @@ window.YK_COMPANY_INFO = {
   representative: '', // 代表者  例: '山田 太郎'
   email:          '', // メール  例: 'info@yoshida-kako.co.jp'
   tel:            '', // 電話    例: '029-000-0000'
+
+  // お問い合わせフォームの送信先(Formspree)
+  // https://formspree.io で無料登録 → フォームを作成 → 表示される
+  // 「https://formspree.io/f/xxxxxxxx」の xxxxxxxx 部分をここに入力してください。
+  formspreeId:    '', // 例: 'xyzabcde'
 };
 
 /* 上の値が入力された項目だけ、「準備中」表示を実際の値に差し替える。 */
