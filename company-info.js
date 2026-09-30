@@ -17,11 +17,11 @@ window.YK_COMPANY_INFO = {
   // 回答はGoogleフォーム/スプレッドシートにたまり、新着はメールで通知されます。
   // 下の値はGoogleフォームの「事前入力したURL」から取り出して入力します。
   googleForm: {
-    action:  'https://docs.google.com/forms/d/e/1FAIpQLSdKosKpQ8znx3YJ00O1JJh0gv09EJDpu-GgOA3q5U5AYHKB1A/formResponse', // 例: 'https://docs.google.com/forms/d/e/1FAIpQL.../formResponse'
-    name:    'entry.735661413', // お名前         例: 'entry.1234567890'
-    org:     'entry.250494078', // 会社・法人名   例: 'entry.2345678901'
-    email:   'entry.688390573', // メールアドレス 例: 'entry.3456789012'
-    message: 'entry.1756217865', // お問い合わせ内容 例: 'entry.4567890123'
+    action:  'https://docs.google.com/forms/d/e/1FAIpQLSfiw2DMZDfOZ20O4Y2EYDib_MCGqNdYaEBXwfN0MfLJPp6UqA/formResponse', // 例: 'https://docs.google.com/forms/d/e/1FAIpQL.../formResponse'
+    name:    'entry.1940720647', // お名前         例: 'entry.1234567890'
+    org:     'entry.1985439516', // 会社・法人名   例: 'entry.2345678901'
+    email:   'entry.288644092', // メールアドレス 例: 'entry.3456789012'
+    message: 'entry.466790730', // お問い合わせ内容 例: 'entry.4567890123'
   },
 };
 
