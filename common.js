@@ -185,8 +185,10 @@
     update();
   }
 
-  /* ---- Contact form (Formspree) ----
-     送信先IDは company-info.js の formspreeId で設定。
+  /* ---- Contact form (Googleフォームへ送信) ----
+     サイトのデザインのままのフォームで入力してもらい、内容を Googleフォームの
+     回答として送信する。送信先は company-info.js の googleForm で設定。
+     Googleフォームは送信結果を返さない(no-cors)ため、通信エラーが無ければ成功とみなす。
      送信中はボタンを無効化してスピナー表示、結果をフォーム下に表示する。
   */
   function initContactForm() {
@@ -195,9 +197,8 @@
     var btn = document.getElementById('contactSubmit');
     var status = document.getElementById('contactStatus');
     var label = btn ? btn.querySelector('.label') : null;
-    var info = window.YK_COMPANY_INFO || {};
-    var id = (info.formspreeId || '').trim();
-    if (id) form.action = 'https://formspree.io/f/' + id;
+    var gf = (window.YK_COMPANY_INFO || {}).googleForm || {};
+    var ready = !!(gf.action && gf.name && gf.email && gf.message);
 
     function setStatus(msg, type) {
       status.textContent = msg;
@@ -213,25 +214,27 @@
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       if (!form.checkValidity()) { form.reportValidity(); return; }
-      if (!id) {
+      if (!ready) {
         setStatus('現在フォームは準備中です。恐れ入りますが、しばらくしてから再度お試しください。', 'error');
         return;
       }
+      var body = new URLSearchParams();
+      [['name', 'name'], ['org', 'org'], ['email', 'email'], ['message', 'message']].forEach(function (p) {
+        var entry = gf[p[0]];
+        var input = form.elements[p[1]];
+        if (entry && input) body.append(entry, input.value);
+      });
       setLoading(true);
       setStatus('', null);
-      fetch(form.action, {
-        method: 'POST',
-        body: new FormData(form),
-        headers: { 'Accept': 'application/json' }
-      }).then(function (res) {
-        if (!res.ok) throw new Error('bad status');
-        form.reset();
-        setStatus('送信しました。お問い合わせありがとうございます。担当者より折り返しご連絡いたします。', 'success');
-      }).catch(function () {
-        setStatus('送信できませんでした。通信状況をご確認のうえ、もう一度「送信する」を押してください。', 'error');
-      }).then(function () {
-        setLoading(false);
-      });
+      fetch(gf.action, { method: 'POST', mode: 'no-cors', body: body })
+        .then(function () {
+          form.reset();
+          setStatus('送信しました。お問い合わせありがとうございます。担当者より折り返しご連絡いたします。', 'success');
+        })
+        .catch(function () {
+          setStatus('送信できませんでした。通信状況をご確認のうえ、もう一度「送信する」を押してください。', 'error');
+        })
+        .then(function () { setLoading(false); });
     });
   }
 

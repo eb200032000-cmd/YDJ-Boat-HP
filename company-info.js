@@ -12,10 +12,17 @@ window.YK_COMPANY_INFO = {
   email:          '', // メール  例: 'info@yoshida-kako.co.jp'
   tel:            '', // 電話    例: '029-000-0000'
 
-  // お問い合わせフォームの送信先(Formspree)
-  // https://formspree.io で無料登録 → フォームを作成 → 表示される
-  // 「https://formspree.io/f/xxxxxxxx」の xxxxxxxx 部分をここに入力してください。
-  formspreeId:    '', // 例: 'xyzabcde'
+  // お問い合わせフォームの送信先(Googleフォーム)
+  // サイトのフォームに入力された内容を、Googleフォームの回答として送ります。
+  // 回答はGoogleフォーム/スプレッドシートにたまり、新着はメールで通知されます。
+  // 下の値はGoogleフォームの「事前入力したURL」から取り出して入力します。
+  googleForm: {
+    action:  '', // 例: 'https://docs.google.com/forms/d/e/1FAIpQL.../formResponse'
+    name:    '', // お名前         例: 'entry.1234567890'
+    org:     '', // 会社・法人名   例: 'entry.2345678901'
+    email:   '', // メールアドレス 例: 'entry.3456789012'
+    message: '', // お問い合わせ内容 例: 'entry.4567890123'
+  },
 };
 
 /* 上の値が入力された項目だけ、「準備中」表示を実際の値に差し替える。 */
