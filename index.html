@@ -341,8 +341,8 @@
 
   /* ─── Contact ─── */
   .contact{background:var(--panel);}
-  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;}
-  @media(max-width:900px){.contact-grid{grid-template-columns:1fr;}}
+  /* 問い合わせはフォームのみ(連絡先の表示は削除)。読みやすい幅の1カラム */
+  .contact-grid{max-width:640px;}
   .field{margin-bottom:18px;}
   .field label{display:block;font-family:var(--mono);font-size:12px;color:var(--ink-dim);text-transform:uppercase;letter-spacing:.07em;margin-bottom:8px;}
   .field label .req{color:var(--accent);margin-left:3px;}
@@ -363,9 +363,6 @@
   .form-status{margin:16px 0 0;font-size:14px;line-height:1.7;min-height:1.7em;}
   .form-status.is-success{color:var(--green);}
   .form-status.is-error{color:#FF8A7A;}
-  .contact-info .row{display:flex;gap:16px;padding:18px 0;border-top:1px solid var(--line);}
-  .contact-info .row:first-child{border-top:none;}
-  .contact-info .k{font-family:var(--mono);font-size:12px;color:var(--ink-dim);min-width:80px;text-transform:uppercase;letter-spacing:.06em;padding-top:3px;}
 
   /* ─── Spec Table (製品スペック / 諸元表) ─── */
   .spec-table{background:var(--bg);}
@@ -1027,11 +1024,6 @@
         </div>
         <p class="form-status" id="contactStatus" role="status" aria-live="polite"></p>
       </form>
-      <div class="contact-info reveal">
-        <div class="row"><div class="k">Mail</div><div class="placeholder" data-field="email">準備中</div></div>
-        <div class="row"><div class="k">Tel</div><div class="placeholder" data-field="tel">準備中</div></div>
-        <div class="row"><div class="k">Address</div><div class="placeholder" data-field="address">準備中</div></div>
-      </div>
     </div>
   </div>
 </section>
