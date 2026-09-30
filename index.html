@@ -49,7 +49,10 @@
     position:absolute;inset:0;
     background-image:url('img05.webp');
     background-size:cover;background-position:50% 45%;
+    /* パララックス: スクロールに合わせてJSで translateY を更新(common.js initHeroParallax) */
+    transform:translate3d(0,0,0) scale(1.08);transform-origin:50% 40%;will-change:transform;
   }
+  @media(prefers-reduced-motion:reduce){.hero-bg{transform:none;will-change:auto;}}
   .hero-scrim{
     position:absolute;inset:0;
     background:
@@ -190,6 +193,21 @@
   .feat-block .fb-img{overflow:hidden;aspect-ratio:4/3;}
   .feat-block .fb-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease-out);}
   .feat-block:hover .fb-img img{transform:scale(1.04);}
+  /* 写真のめくり表示: 画面に入ると、写真が横からスッと現れる(反転ブロックは右から) */
+  .feat-block.reveal{opacity:1;transform:none;}
+  .feat-block .fb-img{clip-path:inset(0 100% 0 0);transition:clip-path 1.1s var(--ease-out);}
+  .feat-block.rev .fb-img{clip-path:inset(0 0 0 100%);}
+  .feat-block .fb-img img{transform:scale(1.14);transition:transform 1.4s var(--ease-out);}
+  .feat-block.is-visible .fb-img{clip-path:inset(0 0 0 0);}
+  .feat-block.is-visible .fb-img img{transform:scale(1);}
+  .feat-block.is-visible:hover .fb-img img{transform:scale(1.04);transition-duration:.6s;}
+  .feat-block .fb-body{opacity:0;transform:translateY(18px);transition:opacity .8s var(--ease-out) .35s,transform .8s var(--ease-out) .35s;}
+  .feat-block.is-visible .fb-body{opacity:1;transform:none;}
+  @media(prefers-reduced-motion:reduce){
+    .feat-block .fb-img,.feat-block.rev .fb-img{clip-path:none;transition:none;}
+    .feat-block .fb-img img{transform:none;transition:none;}
+    .feat-block .fb-body{opacity:1;transform:none;transition:none;}
+  }
   .feat-block .fb-body{padding:56px 48px;}
   .feat-block .fb-tag{
     font-family:var(--cond);font-size:12px;text-transform:uppercase;letter-spacing:.15em;

@@ -159,6 +159,32 @@
   }
 
 
+
+  /* ---- Hero parallax (top page only) ----
+     スクロールに合わせて背景写真をゆっくり(スクロール量の約30%)動かし、奥行きを出す。
+     ヒーローが画面内にある間だけ計算。「視差効果を減らす」設定の端末では動かさない。
+  */
+  function initHeroParallax() {
+    var bg = document.querySelector('.hero-bg');
+    var hero = document.querySelector('.hero');
+    if (!bg || !hero) return;
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var ticking = false;
+    function update() {
+      ticking = false;
+      var y = window.scrollY || window.pageYOffset;
+      var h = hero.offsetHeight;
+      if (y > h) return;
+      bg.style.transform = 'translate3d(0,' + (y * 0.3).toFixed(1) + 'px,0) scale(1.08)';
+    }
+    window.addEventListener('scroll', function () {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(update);
+    }, { passive: true });
+    update();
+  }
+
   /* ---- Contact form (Formspree) ----
      送信先IDは company-info.js の formspreeId で設定。
      送信中はボタンを無効化してスピナー表示、結果をフォーム下に表示する。
@@ -318,6 +344,7 @@
     initMobileCtaBar();
     initGalleryCarousel();
     initContactForm();
+    initHeroParallax();
     initIframeAutoResize();
   }
 
